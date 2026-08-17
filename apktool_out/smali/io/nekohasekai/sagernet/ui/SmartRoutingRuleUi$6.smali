@@ -45,7 +45,7 @@
 
 # virtual methods
 .method public onClick(Landroid/content/DialogInterface;I)V
-    .locals 0
+    .locals 4
 
     .line 132
     iget-object p1, p0, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi$6;->this$0:Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;
@@ -56,7 +56,30 @@
 
     iget-object p2, p0, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi$6;->val$url:Ljava/lang/String;
 
+    const-string v0, "DOMAIN"
+
+    invoke-virtual {p2, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_remove_url
+
+    sget-object v0, Lio/nekohasekai/sagernet/routing/SmartRoutingStore;->INSTANCE:Lio/nekohasekai/sagernet/routing/SmartRoutingStore;
+
+    invoke-virtual {v0, p1}, Lio/nekohasekai/sagernet/routing/SmartRoutingStore;->domainRules(Ljava/lang/String;)Ljava/util/Set;
+
+    move-result-object v1
+
+    invoke-interface {v1, p2}, Ljava/util/Set;->remove(Ljava/lang/Object;)Z
+
+    invoke-virtual {v0, p1, v1}, Lio/nekohasekai/sagernet/routing/SmartRoutingStore;->setDomainRules(Ljava/lang/String;Ljava/util/Set;)V
+
+    goto :goto_removed
+
+    :cond_remove_url
     invoke-static {p1, p2}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper;->removeRuleUrl(Ljava/lang/String;Ljava/lang/String;)V
+
+    :goto_removed
 
     .line 133
     iget-object p1, p0, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi$6;->this$0:Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;

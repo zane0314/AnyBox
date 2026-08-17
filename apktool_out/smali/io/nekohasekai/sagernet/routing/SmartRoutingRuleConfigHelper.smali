@@ -117,6 +117,136 @@
 
     move-result-object v1
 
+    invoke-virtual {v0, v1}, Lio/nekohasekai/sagernet/routing/SmartRoutingStore;->domainRules(Ljava/lang/String;)Ljava/util/Set;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Ljava/util/Set;->isEmpty()Z
+
+    move-result v1
+
+    if-nez v1, :cond_domain_done
+
+    iget-object v1, p0, Lmoe/matsuri/nb4a/SingBoxOptions$MyOptions;->route:Lmoe/matsuri/nb4a/SingBoxOptions$RouteOptions;
+
+    iget-object v1, v1, Lmoe/matsuri/nb4a/SingBoxOptions$RouteOptions;->rules:Ljava/util/List;
+
+    if-nez v1, :cond_domain_rules_ready
+
+    iget-object v1, p0, Lmoe/matsuri/nb4a/SingBoxOptions$MyOptions;->route:Lmoe/matsuri/nb4a/SingBoxOptions$RouteOptions;
+
+    new-instance v2, Ljava/util/ArrayList;
+
+    invoke-direct {v2}, Ljava/util/ArrayList;-><init>()V
+
+    iput-object v2, v1, Lmoe/matsuri/nb4a/SingBoxOptions$RouteOptions;->rules:Ljava/util/List;
+
+    :cond_domain_rules_ready
+    invoke-interface {v0}, Ljava/util/Set;->iterator()Ljava/util/Iterator;
+
+    move-result-object v0
+
+    :goto_domains
+    invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_domain_done
+
+    invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v1
+
+    check-cast v1, Ljava/lang/String;
+
+    if-eqz v1, :goto_domains
+
+    const/16 v2, 0x9
+
+    invoke-virtual {v1, v2}, Ljava/lang/String;->indexOf(I)I
+
+    move-result v2
+
+    if-lez v2, :goto_domains
+
+    const/4 v3, 0x0
+
+    invoke-virtual {v1, v3, v2}, Ljava/lang/String;->substring(II)Ljava/lang/String;
+
+    move-result-object v3
+
+    add-int/lit8 v2, v2, 0x1
+
+    invoke-virtual {v1, v2}, Ljava/lang/String;->substring(I)Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/String;->trim()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/String;->isEmpty()Z
+
+    move-result v2
+
+    if-nez v2, :goto_domains
+
+    const-string v2, "DOMAIN"
+
+    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v2
+
+    if-eqz v2, :cond_domain_suffix
+
+    const/4 v4, 0x0
+
+    goto :cond_domain_add
+
+    :cond_domain_suffix
+    const-string v2, "DOMAIN-SUFFIX"
+
+    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v2
+
+    if-eqz v2, :cond_domain_keyword
+
+    const/4 v4, 0x1
+
+    goto :cond_domain_add
+
+    :cond_domain_keyword
+    const-string v2, "DOMAIN-KEYWORD"
+
+    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v2
+
+    if-eqz v2, :goto_domains
+
+    const/4 v4, 0x2
+
+    :cond_domain_add
+    iget-object v2, p0, Lmoe/matsuri/nb4a/SingBoxOptions$MyOptions;->route:Lmoe/matsuri/nb4a/SingBoxOptions$RouteOptions;
+
+    iget-object v2, v2, Lmoe/matsuri/nb4a/SingBoxOptions$RouteOptions;->rules:Ljava/util/List;
+
+    invoke-static {v1}, Ljava/util/Collections;->singletonList(Ljava/lang/Object;)Ljava/util/List;
+
+    move-result-object v1
+
+    invoke-static {v2, v1, p2, v4}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleConfigHelper;->add(Ljava/util/List;Ljava/util/List;Ljava/lang/String;I)V
+
+    goto :goto_domains
+
+    :cond_domain_done
+    sget-object v0, Lio/nekohasekai/sagernet/routing/SmartRoutingStore;->INSTANCE:Lio/nekohasekai/sagernet/routing/SmartRoutingStore;
+
+    invoke-virtual {p1}, Lio/nekohasekai/sagernet/routing/SmartAppGroup;->getId()Ljava/lang/String;
+
+    move-result-object v1
+
     invoke-virtual {v0, v1}, Lio/nekohasekai/sagernet/routing/SmartRoutingStore;->ruleUrls(Ljava/lang/String;)Ljava/util/Set;
 
     move-result-object v0

@@ -10,6 +10,8 @@
 
 .field private static final CUSTOM_PACKAGES:Ljava/lang/String; = "smartRouting.customPackages"
 
+.field private static final DOMAIN_RULES_PREFIX:Ljava/lang/String; = "smartRouting.domainRules."
+
 .field private static final HIDDEN_BUILT_IN_GROUPS:Ljava/lang/String; = "smartRouting.hiddenBuiltInGroups"
 
 .field public static final INSTANCE:Lio/nekohasekai/sagernet/routing/SmartRoutingStore;
@@ -935,6 +937,22 @@
 
     move-result v0
 
+    if-nez v0, :cond_dynamic
+
+    const-string v0, "direct"
+
+    invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_dynamic
+
+    const-string v0, "reject"
+
+    invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v0
+
     if-eqz v0, :cond_legacy
 
     :cond_dynamic
@@ -1212,6 +1230,84 @@
     .line 126
     :cond_4
     :goto_1
+    return-void
+.end method
+
+.method public final domainRules(Ljava/lang/String;)Ljava/util/Set;
+    .locals 3
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/lang/String;",
+            ")",
+            "Ljava/util/Set<",
+            "Ljava/lang/String;",
+            ">;"
+        }
+    .end annotation
+
+    sget-object v0, Lio/nekohasekai/sagernet/database/DataStore;->INSTANCE:Lio/nekohasekai/sagernet/database/DataStore;
+
+    invoke-virtual {v0}, Lio/nekohasekai/sagernet/database/DataStore;->getConfigurationStore()Lio/nekohasekai/sagernet/database/preference/RoomPreferenceDataStore;
+
+    move-result-object v0
+
+    const-string v1, "smartRouting.domainRules."
+
+    invoke-virtual {v1, p1}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object p1
+
+    new-instance v1, Ljava/util/LinkedHashSet;
+
+    invoke-direct {v1}, Ljava/util/LinkedHashSet;-><init>()V
+
+    invoke-virtual {v0, p1, v1}, Lio/nekohasekai/sagernet/database/preference/RoomPreferenceDataStore;->getStringSet(Ljava/lang/String;Ljava/util/Set;)Ljava/util/Set;
+
+    move-result-object p1
+
+    if-eqz p1, :cond_domain_empty
+
+    new-instance v2, Ljava/util/LinkedHashSet;
+
+    invoke-direct {v2, p1}, Ljava/util/LinkedHashSet;-><init>(Ljava/util/Collection;)V
+
+    return-object v2
+
+    :cond_domain_empty
+    return-object v1
+.end method
+
+.method public final setDomainRules(Ljava/lang/String;Ljava/util/Set;)V
+    .locals 2
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/lang/String;",
+            "Ljava/util/Set<",
+            "Ljava/lang/String;",
+            ">;)V"
+        }
+    .end annotation
+
+    sget-object v0, Lio/nekohasekai/sagernet/database/DataStore;->INSTANCE:Lio/nekohasekai/sagernet/database/DataStore;
+
+    invoke-virtual {v0}, Lio/nekohasekai/sagernet/database/DataStore;->getConfigurationStore()Lio/nekohasekai/sagernet/database/preference/RoomPreferenceDataStore;
+
+    move-result-object v0
+
+    const-string v1, "smartRouting.domainRules."
+
+    invoke-virtual {v1, p1}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object p1
+
+    new-instance v1, Ljava/util/LinkedHashSet;
+
+    invoke-direct {v1, p2}, Ljava/util/LinkedHashSet;-><init>(Ljava/util/Collection;)V
+
+    invoke-virtual {v0, p1, v1}, Lio/nekohasekai/sagernet/database/preference/RoomPreferenceDataStore;->putStringSet(Ljava/lang/String;Ljava/util/Set;)V
+
     return-void
 .end method
 
@@ -2689,7 +2785,7 @@
 
     move-result-object v0
 
-    const/4 v1, 0x3
+    const/4 v1, 0x4
 
     new-array v1, v1, [Ljava/lang/String;
 
@@ -2708,6 +2804,12 @@
     const/4 v2, 0x2
 
     const-string v3, "smartRouting.ruleStatus."
+
+    aput-object v3, v1, v2
+
+    const/4 v2, 0x3
+
+    const-string v3, "smartRouting.domainRules."
 
     aput-object v3, v1, v2
 

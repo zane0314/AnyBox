@@ -129,9 +129,24 @@
 .end method
 
 .method static synthetic access$300(Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;Ljava/lang/String;)V
-    .locals 0
+    .locals 1
 
     .line 25
+    if-eqz p1, :cond_url_input
+
+    const-string v0, "DOMAIN"
+
+    invoke-virtual {p1, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_url_input
+
+    invoke-direct {p0, p1}, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;->showDomainType(Ljava/lang/String;)V
+
+    return-void
+
+    :cond_url_input
     invoke-direct {p0, p1}, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;->showUrlInput(Ljava/lang/String;)V
 
     return-void
@@ -187,6 +202,30 @@
 
     .line 25
     invoke-direct {p0, p1, p2, p3, p4}, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;->showResults(Ljava/lang/String;Landroidx/appcompat/app/AlertDialog;Landroid/widget/TextView;Landroid/widget/Button;)V
+
+    return-void
+.end method
+
+.method static synthetic access$1000(Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;Ljava/lang/String;)V
+    .locals 0
+
+    invoke-direct {p0, p1}, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;->showDomainType(Ljava/lang/String;)V
+
+    return-void
+.end method
+
+.method static synthetic access$1100(Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;Ljava/lang/String;Ljava/lang/String;)V
+    .locals 0
+
+    invoke-direct {p0, p1, p2}, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;->showDomainInput(Ljava/lang/String;Ljava/lang/String;)V
+
+    return-void
+.end method
+
+.method static synthetic access$1200(Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;Ljava/lang/String;Ljava/lang/String;Landroid/widget/EditText;Landroid/widget/TextView;Landroidx/appcompat/app/AlertDialog;)V
+    .locals 0
+
+    invoke-direct/range {p0 .. p5}, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;->saveDomain(Ljava/lang/String;Ljava/lang/String;Landroid/widget/EditText;Landroid/widget/TextView;Landroidx/appcompat/app/AlertDialog;)V
 
     return-void
 .end method
@@ -345,6 +384,16 @@
 
     move-result-object v0
 
+    sget-object v1, Lio/nekohasekai/sagernet/routing/SmartRoutingStore;->INSTANCE:Lio/nekohasekai/sagernet/routing/SmartRoutingStore;
+
+    iget-object v2, p0, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;->groupId:Ljava/lang/String;
+
+    invoke-virtual {v1, v2}, Lio/nekohasekai/sagernet/routing/SmartRoutingStore;->domainRules(Ljava/lang/String;)Ljava/util/Set;
+
+    move-result-object v1
+
+    invoke-interface {v0, v1}, Ljava/util/Set;->addAll(Ljava/util/Collection;)Z
+
     .line 112
     iget-object v1, p0, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;->empty:Landroid/widget/TextView;
 
@@ -461,6 +510,302 @@
     return-void
 .end method
 
+.method private saveDomain(Ljava/lang/String;Ljava/lang/String;Landroid/widget/EditText;Landroid/widget/TextView;Landroidx/appcompat/app/AlertDialog;)V
+    .locals 7
+
+    invoke-virtual {p3}, Landroid/widget/EditText;->getText()Landroid/text/Editable;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/Object;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/String;->trim()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/String;->isEmpty()Z
+
+    move-result v1
+
+    if-nez v1, :cond_domain_invalid
+
+    const-string v1, "DOMAIN-KEYWORD"
+
+    invoke-virtual {v1, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_domain_encode
+
+    const-string v1, " "
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_domain_invalid
+
+    const-string v1, "/"
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_domain_invalid
+
+    const-string v1, ":"
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_domain_invalid
+
+    sget-object v1, Ljava/util/Locale;->ROOT:Ljava/util/Locale;
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->toLowerCase(Ljava/util/Locale;)Ljava/lang/String;
+
+    move-result-object v0
+
+    :cond_domain_encode
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1, p1}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+
+    const/16 v2, 0x9
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    sget-object v1, Lio/nekohasekai/sagernet/routing/SmartRoutingStore;->INSTANCE:Lio/nekohasekai/sagernet/routing/SmartRoutingStore;
+
+    iget-object v2, p0, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;->groupId:Ljava/lang/String;
+
+    invoke-virtual {v1, v2}, Lio/nekohasekai/sagernet/routing/SmartRoutingStore;->domainRules(Ljava/lang/String;)Ljava/util/Set;
+
+    move-result-object v3
+
+    if-eqz p2, :cond_domain_add
+
+    invoke-interface {v3, p2}, Ljava/util/Set;->remove(Ljava/lang/Object;)Z
+
+    :cond_domain_add
+    invoke-interface {v3, v0}, Ljava/util/Set;->add(Ljava/lang/Object;)Z
+
+    invoke-virtual {v1, v2, v3}, Lio/nekohasekai/sagernet/routing/SmartRoutingStore;->setDomainRules(Ljava/lang/String;Ljava/util/Set;)V
+
+    const v0, 0x7f1303f6
+
+    invoke-virtual {p4, v0}, Landroid/widget/TextView;->setText(I)V
+
+    invoke-direct {p0}, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;->render()V
+
+    invoke-direct {p0}, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;->reload()V
+
+    invoke-virtual {p5}, Landroidx/appcompat/app/AlertDialog;->dismiss()V
+
+    return-void
+
+    :cond_domain_invalid
+    const v0, 0x7f1303ff
+
+    invoke-virtual {p4, v0}, Landroid/widget/TextView;->setText(I)V
+
+    return-void
+.end method
+
+.method private showDomainInput(Ljava/lang/String;Ljava/lang/String;)V
+    .locals 10
+
+    iget-object v0, p0, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;->context:Landroid/content/Context;
+
+    invoke-static {v0}, Landroid/view/LayoutInflater;->from(Landroid/content/Context;)Landroid/view/LayoutInflater;
+
+    move-result-object v0
+
+    const v1, 0x7f0d00c1
+
+    const/4 v2, 0x0
+
+    const/4 v3, 0x0
+
+    invoke-virtual {v0, v1, v2, v3}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;
+
+    move-result-object v0
+
+    const v1, 0x7f0a0379
+
+    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object v1
+
+    move-object v5, v1
+
+    check-cast v5, Landroid/widget/EditText;
+
+    const v1, 0x7f0a037b
+
+    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object v1
+
+    move-object v6, v1
+
+    check-cast v6, Landroid/widget/TextView;
+
+    const v1, 0x7f0a037a
+
+    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/widget/Button;
+
+    const v2, 0x7f1303fe
+
+    invoke-virtual {v5, v2}, Landroid/widget/EditText;->setHint(I)V
+
+    if-eqz p2, :cond_domain_input_new
+
+    const/16 v2, 0x9
+
+    invoke-virtual {p2, v2}, Ljava/lang/String;->indexOf(I)I
+
+    move-result v2
+
+    if-lez v2, :cond_domain_input_new
+
+    add-int/lit8 v2, v2, 0x1
+
+    invoke-virtual {p2, v2}, Ljava/lang/String;->substring(I)Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {v5, v2}, Landroid/widget/EditText;->setText(Ljava/lang/CharSequence;)V
+
+    :cond_domain_input_new
+    if-nez p2, :cond_domain_input_replace
+
+    const v2, 0x7f1302da
+
+    goto :goto_domain_button
+
+    :cond_domain_input_replace
+    const v2, 0x7f1303f0
+
+    :goto_domain_button
+    invoke-virtual {v1, v2}, Landroid/widget/Button;->setText(I)V
+
+    const v2, 0x7f1303fd
+
+    invoke-direct {p0, v2}, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;->builder(I)Landroidx/appcompat/app/AlertDialog$Builder;
+
+    move-result-object v2
+
+    iget-object v3, v2, Landroidx/appcompat/app/AlertDialog$Builder;->P:Landroidx/appcompat/app/AlertController$AlertParams;
+
+    iput-object v0, v3, Landroidx/appcompat/app/AlertController$AlertParams;->mView:Landroid/view/View;
+
+    invoke-virtual {v2}, Landroidx/appcompat/app/AlertDialog$Builder;->create()Landroidx/appcompat/app/AlertDialog;
+
+    move-result-object v8
+
+    new-instance v9, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi$12;
+
+    move-object v2, v9
+
+    move-object v3, p0
+
+    move-object v4, p1
+
+    move-object v7, p2
+
+    invoke-direct/range {v2 .. v8}, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi$12;-><init>(Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;Ljava/lang/String;Landroid/widget/EditText;Landroid/widget/TextView;Ljava/lang/String;Landroidx/appcompat/app/AlertDialog;)V
+
+    invoke-virtual {v1, v9}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    invoke-virtual {v8}, Landroidx/appcompat/app/AlertDialog;->show()V
+
+    return-void
+.end method
+
+.method private showDomainType(Ljava/lang/String;)V
+    .locals 5
+
+    const/4 v0, 0x1
+
+    if-eqz p1, :cond_domain_type_ready
+
+    const-string v1, "DOMAIN\t"
+
+    invoke-virtual {p1, v1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_domain_type_keyword
+
+    const/4 v0, 0x0
+
+    goto :cond_domain_type_ready
+
+    :cond_domain_type_keyword
+    const-string v1, "DOMAIN-KEYWORD\t"
+
+    invoke-virtual {p1, v1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_domain_type_ready
+
+    const/4 v0, 0x2
+
+    :cond_domain_type_ready
+    const/4 v1, 0x3
+
+    new-array v1, v1, [Ljava/lang/CharSequence;
+
+    const-string v2, "DOMAIN"
+
+    const/4 v3, 0x0
+
+    aput-object v2, v1, v3
+
+    const-string v2, "DOMAIN-SUFFIX"
+
+    const/4 v3, 0x1
+
+    aput-object v2, v1, v3
+
+    const-string v2, "DOMAIN-KEYWORD"
+
+    const/4 v3, 0x2
+
+    aput-object v2, v1, v3
+
+    const v2, 0x7f1303fd
+
+    invoke-direct {p0, v2}, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;->builder(I)Landroidx/appcompat/app/AlertDialog$Builder;
+
+    move-result-object v2
+
+    new-instance v3, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi$11;
+
+    invoke-direct {v3, p0, p1}, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi$11;-><init>(Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;Ljava/lang/String;)V
+
+    invoke-virtual {v2, v1, v0, v3}, Landroidx/appcompat/app/AlertDialog$Builder;->setSingleChoiceItems([Ljava/lang/CharSequence;ILandroid/content/DialogInterface$OnClickListener;)V
+
+    invoke-virtual {v2}, Landroidx/appcompat/app/AlertDialog$Builder;->show()Landroidx/appcompat/app/AlertDialog;
+
+    return-void
+.end method
+
 .method private showMain()V
     .locals 4
 
@@ -526,6 +871,18 @@
     new-instance v2, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi$3;
 
     invoke-direct {v2, p0}, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi$3;-><init>(Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;)V
+
+    invoke-virtual {v1, v2}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    const v1, 0x7f0a037c
+
+    invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object v1
+
+    new-instance v2, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi$10;
+
+    invoke-direct {v2, p0}, Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi$10;-><init>(Lio/nekohasekai/sagernet/ui/SmartRoutingRuleUi;)V
 
     invoke-virtual {v1, v2}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 

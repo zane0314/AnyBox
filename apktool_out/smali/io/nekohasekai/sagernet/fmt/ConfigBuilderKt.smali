@@ -1968,6 +1968,38 @@
 
     check-cast v4, Ljava/lang/String;
 
+    const-string v6, "direct"
+
+    invoke-virtual {v6, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v12
+
+    if-eqz v12, :cond_smart_reject
+
+    move-object/from16 v11, p2
+
+    invoke-interface {v11, v4, v6}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+
+    goto :goto_27
+
+    :cond_smart_reject
+    const-string v6, "reject"
+
+    invoke-virtual {v6, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v12
+
+    if-eqz v12, :cond_smart_proxy_target
+
+    move-object/from16 v11, p2
+
+    const-string v12, "block"
+
+    invoke-interface {v11, v4, v12}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+
+    goto :goto_27
+
+    :cond_smart_proxy_target
     .line 173
     move-object/from16 v13, v43
 

@@ -7,5 +7,6 @@
         <LinearLayout android:id="@id/smart_rule_list" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" />
         <com.google.android.material.button.MaterialButton android:id="@id/smart_rule_online" android:layout_width="match_parent" android:layout_height="44.0dp" android:layout_marginTop="8.0dp" android:text="@string/smart_rules_online" app:icon="@drawable/ic_baseline_download_24" app:iconGravity="textStart" app:iconTint="?colorPrimary" style="@style/Widget.SagerNet.Button.Liquid.Secondary" />
         <com.google.android.material.button.MaterialButton android:id="@id/smart_rule_custom" android:layout_width="match_parent" android:layout_height="44.0dp" android:layout_marginTop="6.0dp" android:text="@string/smart_rules_custom" app:icon="@drawable/ic_add_24" app:iconGravity="textStart" app:iconTint="?colorPrimary" style="@style/Widget.SagerNet.Button.Liquid.Secondary" />
+        <com.google.android.material.button.MaterialButton android:id="@id/smart_rule_domain" android:layout_width="match_parent" android:layout_height="44.0dp" android:layout_marginTop="6.0dp" android:text="@string/smart_rules_domain" app:icon="@drawable/ic_add_24" app:iconGravity="textStart" app:iconTint="?colorPrimary" style="@style/Widget.SagerNet.Button.Liquid.Secondary" />
     </LinearLayout>
 </ScrollView>

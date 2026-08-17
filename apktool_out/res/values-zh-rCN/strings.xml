@@ -651,6 +651,10 @@ www.example.com 1.1.1.1 1.1.1.2"</string>
     <string name="smart_rules_online_results">在线规则结果</string>
     <string name="smart_rules_delete_confirm">删除这条规则来源？</string>
     <string name="smart_rules_close">关闭</string>
+    <string name="smart_rules_domain">自定义域名</string>
+    <string name="smart_domain_title">域名规则</string>
+    <string name="smart_domain_hint">输入域名或关键词，例如 youtube.com</string>
+    <string name="smart_domain_invalid">请输入有效的域名或关键词</string>
     <string name="smart_region_auto">自动</string>
     <string name="smart_region_detect_automatically">自动识别</string>
     <string name="smart_region_hong_kong">香港</string>

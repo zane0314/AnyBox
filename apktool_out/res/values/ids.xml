@@ -743,6 +743,7 @@
     <id name="smart_rule_input" />
     <id name="smart_rule_search_button" />
     <id name="smart_rule_status" />
+    <id name="smart_rule_domain" />
     <id name="smart_group_controls" />
     <id name="smart_group_foreground" />
     <id name="smart_group_header" />

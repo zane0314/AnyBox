@@ -402,6 +402,22 @@
 
     .line 31
     :cond_0
+    const-string v0, "direct"
+
+    invoke-virtual {v0, p0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-nez v0, :goto_2
+
+    const-string v0, "reject"
+
+    invoke-virtual {v0, p0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-nez v0, :goto_2
+
     const-string v0, "auto"
 
     invoke-virtual {v0, p0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -834,6 +850,32 @@
 
     .line 70
     :cond_1
+    const-string p0, "direct"
+
+    invoke-virtual {p0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result p0
+
+    if-eqz p0, :cond_direct_label
+
+    const-string p0, "\u76f4\u8fde"
+
+    return-object p0
+
+    :cond_direct_label
+    const-string p0, "reject"
+
+    invoke-virtual {p0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result p0
+
+    if-eqz p0, :cond_proxy_label
+
+    const-string p0, "\u62d2\u7edd"
+
+    return-object p0
+
+    :cond_proxy_label
     :try_start_0
     const-string p0, "group:"
 
@@ -1235,6 +1277,38 @@
 
     invoke-static/range {v3 .. v8}, Lio/nekohasekai/sagernet/routing/SmartRoutingTargetHelper;->addTargetRow(Landroid/view/LayoutInflater;Landroid/widget/LinearLayout;Ljava/lang/String;ZILandroid/view/View$OnClickListener;)V
 
+    const-string v3, "direct"
+
+    invoke-virtual {v9, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v6
+
+    new-instance v8, Lio/nekohasekai/sagernet/routing/SmartRoutingTargetHelper$4;
+
+    invoke-direct {v8, v0, v1, v3}, Lio/nekohasekai/sagernet/routing/SmartRoutingTargetHelper$4;-><init>(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/String;)V
+
+    const-string v5, "\u76f4\u8fde"
+
+    move-object v3, v2
+
+    invoke-static/range {v3 .. v8}, Lio/nekohasekai/sagernet/routing/SmartRoutingTargetHelper;->addTargetRow(Landroid/view/LayoutInflater;Landroid/widget/LinearLayout;Ljava/lang/String;ZILandroid/view/View$OnClickListener;)V
+
+    const-string v3, "reject"
+
+    invoke-virtual {v9, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v6
+
+    new-instance v8, Lio/nekohasekai/sagernet/routing/SmartRoutingTargetHelper$4;
+
+    invoke-direct {v8, v0, v1, v3}, Lio/nekohasekai/sagernet/routing/SmartRoutingTargetHelper$4;-><init>(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/String;)V
+
+    const-string v5, "\u62d2\u7edd"
+
+    move-object v3, v2
+
+    invoke-static/range {v3 .. v8}, Lio/nekohasekai/sagernet/routing/SmartRoutingTargetHelper;->addTargetRow(Landroid/view/LayoutInflater;Landroid/widget/LinearLayout;Ljava/lang/String;ZILandroid/view/View$OnClickListener;)V
+
     .line 113
     invoke-static {}, Lio/nekohasekai/sagernet/routing/SmartRoutingTargetHelper;->groups()Ljava/util/List;
 
@@ -1589,6 +1663,32 @@
 
     .line 92
     :cond_0
+    const-string v0, "direct"
+
+    invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_direct_summary
+
+    const-string p0, "\u6d41\u91cf\u76f4\u63a5\u8fde\u63a5"
+
+    return-object p0
+
+    :cond_direct_summary
+    const-string v0, "reject"
+
+    invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_proxy_summary
+
+    const-string p0, "\u62d2\u7edd\u8fde\u63a5"
+
+    return-object p0
+
+    :cond_proxy_summary
     const-string v0, "group:"
 
     invoke-virtual {p1, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
