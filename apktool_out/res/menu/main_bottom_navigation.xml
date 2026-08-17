@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:icon="@drawable/ic_baseline_home_24" android:id="@id/bottom_home" android:title="@string/bottom_home" />
+    <item android:icon="@drawable/ic_mingcute_route_24" android:id="@id/bottom_nodes" android:title="@string/bottom_nodes" />
+    <item android:icon="@drawable/ic_lan_share_24" android:id="@id/bottom_share" android:title="@string/bottom_share" />
+    <item android:icon="@drawable/ic_baseline_tune_24" android:id="@id/bottom_settings" android:title="@string/settings" />
+</menu>

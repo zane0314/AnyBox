@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout android:id="@id/appbar" android:background="@android:color/transparent" android:layout_width="match_parent" android:layout_height="?actionBarSize" app:elevation="0.0dp" app:liftOnScroll="false"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.appbar.MaterialToolbar android:theme="?actionBarTheme" android:id="@id/toolbar" android:background="@android:color/transparent" android:layout_width="match_parent" android:layout_height="match_parent" android:touchscreenBlocksFocus="false" app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight" app:title="@string/app_name" app:titleTextAppearance="?toolbarTitleTextAppearance" />
+</com.google.android.material.appbar.AppBarLayout>

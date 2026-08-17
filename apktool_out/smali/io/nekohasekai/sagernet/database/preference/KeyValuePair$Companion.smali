@@ -1,0 +1,42 @@
+.class public final Lio/nekohasekai/sagernet/database/preference/KeyValuePair$Companion;
+.super Ljava/lang/Object;
+.source "SourceFile"
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lio/nekohasekai/sagernet/database/preference/KeyValuePair;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x19
+    name = "Companion"
+.end annotation
+
+
+# direct methods
+.method private constructor <init>()V
+    .locals 0
+
+    .line 2
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+.method public synthetic constructor <init>(Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+    .locals 0
+
+    .line 1
+    invoke-direct {p0}, Lio/nekohasekai/sagernet/database/preference/KeyValuePair$Companion;-><init>()V
+
+    return-void
+.end method
+
+.method public static synthetic getTYPE_INT$annotations()V
+    .locals 0
+    .annotation runtime Lkotlin/Deprecated;
+    .end annotation
+
+    return-void
+.end method

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:icon="@drawable/ic_baseline_refresh_24" android:id="@id/action_share_refresh" android:title="@string/refresh" app:showAsAction="ifRoom" />
+    <item android:icon="@drawable/ic_baseline_more_vert_24" android:id="@id/action_misc" android:title="@string/more_actions" app:showAsAction="ifRoom">
+        <menu>
+            <item android:id="@id/action_share_copy_port" android:title="@string/share_copy_port" />
+        </menu>
+    </item>
+</menu>

@@ -1,0 +1,69 @@
+.class public abstract Landroidx/compose/ui/draw/DrawModifierKt;
+.super Ljava/lang/Object;
+.source "SourceFile"
+
+
+# direct methods
+.method public static final drawBehind(Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function1;)Landroidx/compose/ui/Modifier;
+    .locals 1
+
+    .line 1
+    new-instance v0, Landroidx/compose/ui/draw/DrawBehindElement;
+
+    .line 2
+    .line 3
+    invoke-direct {v0, p1}, Landroidx/compose/ui/draw/DrawBehindElement;-><init>(Lkotlin/jvm/functions/Function1;)V
+
+    .line 4
+    .line 5
+    .line 6
+    invoke-interface {p0, v0}, Landroidx/compose/ui/Modifier;->then(Landroidx/compose/ui/Modifier;)Landroidx/compose/ui/Modifier;
+
+    .line 7
+    .line 8
+    .line 9
+    move-result-object p0
+
+    .line 10
+    return-object p0
+.end method
+
+.method public static final drawWithContent(Lio/nekohasekai/sagernet/ui/liquid/animation/InteractiveHighlight$$ExternalSyntheticLambda0;)Landroidx/compose/ui/Modifier;
+    .locals 1
+
+    .line 1
+    new-instance v0, Landroidx/compose/ui/draw/DrawWithContentElement;
+
+    .line 2
+    .line 3
+    invoke-direct {v0, p0}, Landroidx/compose/ui/draw/DrawWithContentElement;-><init>(Lio/nekohasekai/sagernet/ui/liquid/animation/InteractiveHighlight$$ExternalSyntheticLambda0;)V
+
+    .line 4
+    .line 5
+    .line 6
+    return-object v0
+.end method
+
+.method public static paint$default(Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/vector/VectorPainter;Landroidx/compose/ui/graphics/BlendModeColorFilter;)Landroidx/compose/ui/Modifier;
+    .locals 1
+
+    .line 1
+    new-instance v0, Landroidx/compose/ui/draw/PainterElement;
+
+    .line 2
+    .line 3
+    invoke-direct {v0, p1, p2}, Landroidx/compose/ui/draw/PainterElement;-><init>(Landroidx/compose/ui/graphics/vector/VectorPainter;Landroidx/compose/ui/graphics/BlendModeColorFilter;)V
+
+    .line 4
+    .line 5
+    .line 6
+    invoke-interface {p0, v0}, Landroidx/compose/ui/Modifier;->then(Landroidx/compose/ui/Modifier;)Landroidx/compose/ui/Modifier;
+
+    .line 7
+    .line 8
+    .line 9
+    move-result-object p0
+
+    .line 10
+    return-object p0
+.end method

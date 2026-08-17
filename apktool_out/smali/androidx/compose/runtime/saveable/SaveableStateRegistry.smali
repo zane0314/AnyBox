@@ -1,0 +1,11 @@
+.class public interface abstract Landroidx/compose/runtime/saveable/SaveableStateRegistry;
+.super Ljava/lang/Object;
+.source "SourceFile"
+
+
+# virtual methods
+.method public abstract consumeRestored(Ljava/lang/String;)Ljava/lang/Object;
+.end method
+
+.method public abstract registerProvider(Ljava/lang/String;Lkotlin/jvm/functions/Function0;)Landroidx/compose/runtime/saveable/SaveableStateRegistry$Entry;
+.end method

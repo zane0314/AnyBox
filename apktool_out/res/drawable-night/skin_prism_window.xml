@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient android:startColor="@color/prism_ambient_base_start" android:endColor="@color/prism_ambient_base_end" android:angle="315.0" android:centerColor="@color/prism_ambient_base_center" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient android:startColor="@color/prism_ambient_azure" android:endColor="@android:color/transparent" android:angle="0.0" android:type="radial" android:centerX="0.02" android:centerY="0.06" android:gradientRadius="620.0dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient android:startColor="@color/prism_ambient_violet" android:endColor="@android:color/transparent" android:angle="0.0" android:type="radial" android:centerX="0.98" android:centerY="0.02" android:gradientRadius="660.0dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient android:startColor="@color/prism_ambient_mint" android:endColor="@android:color/transparent" android:angle="0.0" android:type="radial" android:centerX="1.0" android:centerY="1.0" android:gradientRadius="700.0dp" />
+        </shape>
+    </item>
+</layer-list>
