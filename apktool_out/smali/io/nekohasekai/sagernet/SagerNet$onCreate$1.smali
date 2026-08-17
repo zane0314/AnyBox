@@ -58,6 +58,101 @@
     return-void
 .end method
 
+.method private static final migrateRoutePositions(Landroid/content/Context;)V
+    .locals 11
+
+    :try_start_0
+    const-string v0, "anybox_migrations"
+
+    const/4 v1, 0x0
+
+    invoke-virtual {p0, v0, v1}, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v2, "route_position_1_1_2"
+
+    invoke-interface {v0, v2, v1}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v3
+
+    if-nez v3, :cond_2
+
+    sget-object v3, Lio/nekohasekai/sagernet/database/SagerDatabase;->Companion:Lio/nekohasekai/sagernet/database/SagerDatabase$Companion;
+
+    invoke-virtual {v3}, Lio/nekohasekai/sagernet/database/SagerDatabase$Companion;->getRulesDao()Lio/nekohasekai/sagernet/database/RuleEntity$Dao;
+
+    move-result-object v3
+
+    invoke-interface {v3}, Lio/nekohasekai/sagernet/database/RuleEntity$Dao;->allRules()Ljava/util/List;
+
+    move-result-object v4
+
+    invoke-interface {v4}, Ljava/util/List;->iterator()Ljava/util/Iterator;
+
+    move-result-object v5
+
+    :goto_0
+    invoke-interface {v5}, Ljava/util/Iterator;->hasNext()Z
+
+    move-result v6
+
+    if-eqz v6, :cond_1
+
+    invoke-interface {v5}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v6
+
+    check-cast v6, Lio/nekohasekai/sagernet/database/RuleEntity;
+
+    invoke-virtual {v6}, Lio/nekohasekai/sagernet/database/RuleEntity;->getOutbound()J
+
+    move-result-wide v7
+
+    const-wide/16 v9, 0x0
+
+    cmp-long v7, v7, v9
+
+    if-eqz v7, :goto_0
+
+    const/4 v7, 0x1
+
+    invoke-virtual {v6, v7}, Lio/nekohasekai/sagernet/database/RuleEntity;->setPrioritizeOverSmartRouting(Z)V
+
+    goto :goto_0
+
+    :cond_1
+    invoke-interface {v3, v4}, Lio/nekohasekai/sagernet/database/RuleEntity$Dao;->updateRules(Ljava/util/List;)V
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const/4 v1, 0x1
+
+    invoke-interface {v0, v2, v1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    :cond_2
+    return-void
+
+    :catch_0
+    move-exception v0
+
+    const-string v1, "AnyBox"
+
+    const-string v2, "Route position migration failed"
+
+    invoke-static {v1, v2, v0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
+
+    return-void
+.end method
+
 
 # virtual methods
 .method public final create(Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Lkotlin/coroutines/Continuation;
@@ -146,6 +241,10 @@
     .line 9
     .line 10
     invoke-virtual {p1}, Lio/nekohasekai/sagernet/utils/PackageCache;->register()V
+
+    iget-object p1, p0, Lio/nekohasekai/sagernet/SagerNet$onCreate$1;->this$0:Lio/nekohasekai/sagernet/SagerNet;
+
+    invoke-static {p1}, Lio/nekohasekai/sagernet/SagerNet$onCreate$1;->migrateRoutePositions(Landroid/content/Context;)V
 
     .line 11
     .line 12

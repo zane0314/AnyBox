@@ -481,7 +481,9 @@ www.example.com 1.1.1.1 1.1.1.2"</string>
     <string name="route_opt_block_quic">遮蔽 QUIC</string>
     <string name="route_opt_bypass_lan">略過區域網路位址</string>
     <string name="route_play_store">%s Google Play商店規則</string>
-    <string name="route_prioritize_over_smart_routing">優先於智慧分流</string>
+    <string name="route_prioritize_over_smart_routing">規則位置</string>
+    <string name="route_position_after">後置（應用分流之後）</string>
+    <string name="route_position_before">前置（應用分流之前）</string>
     <string name="route_profile">選取設定檔…</string>
     <string name="route_proxy">代理</string>
     <string name="route_reset">重設</string>

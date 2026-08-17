@@ -549,7 +549,9 @@ www.example.com 1.1.1.1 1.1.1.2"</string>
     <string name="route_opt_block_quic">屏蔽 QUIC</string>
     <string name="route_opt_bypass_lan">绕过局域网地址</string>
     <string name="route_play_store">%s Play 商店规则</string>
-    <string name="route_prioritize_over_smart_routing">优先于智能分流</string>
+    <string name="route_prioritize_over_smart_routing">规则位置</string>
+    <string name="route_position_after">后置（应用分流之后）</string>
+    <string name="route_position_before">前置（应用分流之前）</string>
     <string name="route_profile">选择配置…</string>
     <string name="route_group">选择分组…</string>
     <string name="route_proxy">代理</string>

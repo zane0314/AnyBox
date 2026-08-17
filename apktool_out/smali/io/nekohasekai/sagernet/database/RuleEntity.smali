@@ -2693,49 +2693,10 @@
 .end method
 
 .method public final takesPriorityOverSmartRouting()Z
-    .locals 4
+    .locals 1
 
-    .line 1
-    iget-wide v0, p0, Lio/nekohasekai/sagernet/database/RuleEntity;->outbound:J
-
-    .line 2
-    .line 3
-    const-wide/16 v2, 0x0
-
-    .line 4
-    .line 5
-    cmp-long v0, v0, v2
-
-    .line 6
-    .line 7
-    if-nez v0, :cond_1
-
-    .line 8
-    .line 9
     iget-boolean v0, p0, Lio/nekohasekai/sagernet/database/RuleEntity;->prioritizeOverSmartRouting:Z
 
-    .line 10
-    .line 11
-    if-eqz v0, :cond_0
-
-    .line 12
-    .line 13
-    goto :goto_0
-
-    .line 14
-    :cond_0
-    const/4 v0, 0x0
-
-    .line 15
-    goto :goto_1
-
-    .line 16
-    :cond_1
-    :goto_0
-    const/4 v0, 0x1
-
-    .line 17
-    :goto_1
     return v0
 .end method
 

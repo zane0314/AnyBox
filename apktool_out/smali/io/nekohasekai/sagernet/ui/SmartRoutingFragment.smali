@@ -2176,7 +2176,7 @@
     .locals 0
 
     .line 1
-    invoke-direct {p0, p1}, Lio/nekohasekai/sagernet/ui/SmartRoutingFragment;->showRouteOverflow(Landroid/view/View;)V
+    invoke-static {p0, p1}, Lio/nekohasekai/sagernet/ui/SmartRoutingFragment;->onViewCreated$lambda$4(Lio/nekohasekai/sagernet/ui/SmartRoutingFragment;Landroid/view/View;)V
 
     .line 2
     .line 3

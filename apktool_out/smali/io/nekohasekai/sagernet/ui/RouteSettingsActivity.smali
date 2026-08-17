@@ -329,43 +329,8 @@
 .end method
 
 .method private final updatePriorityPreferenceVisibility(Ljava/lang/String;)V
-    .locals 2
+    .locals 0
 
-    .line 1
-    iget-object v0, p0, Lio/nekohasekai/sagernet/ui/RouteSettingsActivity;->prioritizeOverSmartRouting:Landroidx/preference/SwitchPreference;
-
-    .line 2
-    .line 3
-    if-eqz v0, :cond_0
-
-    .line 4
-    .line 5
-    invoke-virtual {p0}, Lio/nekohasekai/sagernet/ui/RouteSettingsActivity;->getPrioritizeOverSmartRouting()Landroidx/preference/SwitchPreference;
-
-    .line 6
-    .line 7
-    .line 8
-    move-result-object v0
-
-    .line 9
-    const-string v1, "0"
-
-    .line 10
-    .line 11
-    invoke-static {p1, v1}, Lkotlin/jvm/internal/Intrinsics;->areEqual(Ljava/lang/Object;Ljava/lang/Object;)Z
-
-    .line 12
-    .line 13
-    .line 14
-    move-result p1
-
-    .line 15
-    invoke-virtual {v0, p1}, Landroidx/preference/Preference;->setVisible(Z)V
-
-    .line 16
-    .line 17
-    .line 18
-    :cond_0
     return-void
 .end method
 
@@ -914,9 +879,9 @@
     :cond_1
     const-wide/16 v3, -0x2
 
-    cmp-long v1, v1, v3
+    cmp-long v5, v1, v3
 
-    if-nez v1, :cond_2
+    if-nez v5, :cond_2
 
     const/4 v1, 0x2
 
@@ -1989,7 +1954,7 @@
 .end method
 
 .method public final serialize(Lio/nekohasekai/sagernet/database/RuleEntity;)V
-    .locals 7
+    .locals 9
 
     .line 1
     sget-object v0, Lio/nekohasekai/sagernet/database/DataStore;->INSTANCE:Lio/nekohasekai/sagernet/database/DataStore;

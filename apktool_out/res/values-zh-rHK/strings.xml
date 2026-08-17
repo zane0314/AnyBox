@@ -160,7 +160,9 @@
     <string name="route_block">封鎖</string>
     <string name="route_bypass">繞過</string>
     <string name="route_opt_block_ads">封鎖廣告</string>
-    <string name="route_prioritize_over_smart_routing">優先於智能分流</string>
+    <string name="route_prioritize_over_smart_routing">規則位置</string>
+    <string name="route_position_after">後置（應用分流之後）</string>
+    <string name="route_position_before">前置（應用分流之前）</string>
     <string name="route_rules_official">官方</string>
     <string name="security_settings">安全設定</string>
     <string name="selected">揀咗</string>
