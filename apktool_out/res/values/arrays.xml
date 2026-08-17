@@ -659,4 +659,34 @@
         <item></item>
         <item>xtls-rprx-vision</item>
     </string-array>
+    <string-array name="smart_rule_update_interval_entries">
+        <item>@string/smart_rules_update_off</item>
+        <item>@string/smart_rules_update_6_hours</item>
+        <item>@string/smart_rules_update_12_hours</item>
+        <item>@string/smart_rules_update_24_hours</item>
+        <item>@string/smart_rules_update_3_days</item>
+        <item>@string/smart_rules_update_7_days</item>
+    </string-array>
+    <string-array name="smart_rule_update_interval_values">
+        <item>0</item>
+        <item>6h</item>
+        <item>12h</item>
+        <item>24h</item>
+        <item>3d</item>
+        <item>7d</item>
+    </string-array>
+    <string-array name="smart_rule_update_delay_entries">
+        <item>@string/smart_rules_update_immediately</item>
+        <item>@string/smart_rules_update_15_seconds</item>
+        <item>@string/smart_rules_update_30_seconds</item>
+        <item>@string/smart_rules_update_1_minute</item>
+        <item>@string/smart_rules_update_5_minutes</item>
+    </string-array>
+    <string-array name="smart_rule_update_delay_values">
+        <item>0</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>300</item>
+    </string-array>
 </resources>

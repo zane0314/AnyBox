@@ -920,10 +920,12 @@
 
 # virtual methods
 .method public final changeState(Lio/nekohasekai/sagernet/bg/BaseService$State;Ljava/lang/String;)V
-    .locals 2
+    .locals 3
 
     .line 1
     iget-object v0, p0, Lio/nekohasekai/sagernet/bg/BaseService$Data;->state:Lio/nekohasekai/sagernet/bg/BaseService$State;
+
+    const/4 v2, 0x0
 
     .line 2
     .line 3
@@ -940,6 +942,8 @@
     .line 8
     :cond_0
     if-eq v0, p1, :cond_2
+
+    const/4 v2, 0x1
 
     .line 9
     .line 10
@@ -991,6 +995,24 @@
     .line 31
     .line 32
     invoke-virtual {v0, p1, p2}, Lio/nekohasekai/sagernet/bg/BaseService$Binder;->stateChanged(Lio/nekohasekai/sagernet/bg/BaseService$State;Ljava/lang/String;)Lkotlinx/coroutines/Job;
+
+    if-eqz v2, :cond_3
+
+    sget-object v0, Lio/nekohasekai/sagernet/bg/BaseService$State;->Connected:Lio/nekohasekai/sagernet/bg/BaseService$State;
+
+    if-ne p1, v0, :cond_4
+
+    const/4 v0, 0x1
+
+    goto :goto_1
+
+    :cond_4
+    const/4 v0, 0x0
+
+    :goto_1
+    invoke-static {v0}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->onServiceStateChanged(Z)V
+
+    :cond_3
 
     .line 33
     .line 34

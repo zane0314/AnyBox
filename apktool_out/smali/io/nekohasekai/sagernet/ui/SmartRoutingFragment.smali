@@ -5745,7 +5745,7 @@
 .end method
 
 .method public onViewCreated(Landroid/view/View;Landroid/os/Bundle;)V
-    .locals 7
+    .locals 8
 
     .line 1
     const/4 v0, 0x1
@@ -5755,6 +5755,8 @@
 
     .line 3
     invoke-super {p0, p1, p2}, Lio/nekohasekai/sagernet/ui/ToolbarFragment;->onViewCreated(Landroid/view/View;Landroid/os/Bundle;)V
+
+    move-object v7, p1
 
     .line 4
     .line 5
@@ -6233,6 +6235,8 @@
     .line 255
     .line 256
     invoke-direct {p0}, Lio/nekohasekai/sagernet/ui/SmartRoutingFragment;->refreshSourceGroup()V
+
+    invoke-static {p0, v7}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->bind(Ljava/lang/Object;Landroid/view/View;)V
 
     .line 257
     .line 258
