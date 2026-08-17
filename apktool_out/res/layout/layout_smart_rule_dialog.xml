@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent" android:layout_height="wrap_content" android:fillViewport="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="8.0dp" android:paddingEnd="8.0dp" android:paddingBottom="8.0dp">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/smart_rules_help" android:textColor="?skinSecondaryTextColor" android:textSize="12.0sp" android:layout_marginBottom="8.0dp" />
+        <TextView android:id="@id/smart_rule_empty" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/smart_rules_empty" android:textColor="?skinSecondaryTextColor" android:gravity="center" android:padding="16.0dp" />
+        <LinearLayout android:id="@id/smart_rule_list" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" />
+        <com.google.android.material.button.MaterialButton android:id="@id/smart_rule_online" android:layout_width="match_parent" android:layout_height="44.0dp" android:layout_marginTop="8.0dp" android:text="@string/smart_rules_online" app:icon="@drawable/ic_baseline_download_24" app:iconGravity="textStart" app:iconTint="?colorPrimary" style="@style/Widget.SagerNet.Button.Liquid.Secondary" />
+        <com.google.android.material.button.MaterialButton android:id="@id/smart_rule_custom" android:layout_width="match_parent" android:layout_height="44.0dp" android:layout_marginTop="6.0dp" android:text="@string/smart_rules_custom" app:icon="@drawable/ic_add_24" app:iconGravity="textStart" app:iconTint="?colorPrimary" style="@style/Widget.SagerNet.Button.Liquid.Secondary" />
+    </LinearLayout>
+</ScrollView>

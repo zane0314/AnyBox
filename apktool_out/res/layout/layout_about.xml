@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_marginStart="@dimen/content_horizontal_margin" android:layout_marginEnd="@dimen/content_horizontal_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include android:layout_width="match_parent" android:layout_height="wrap_content" layout="@layout/layout_appbar" />
+    <androidx.core.widget.NestedScrollView android:layout_width="match_parent" android:layout_height="match_parent">
+        <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+            <io.nekohasekai.sagernet.ui.toolkit.LiquidGlassCardView android:id="@id/title_card" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="8.0dp" android:layout_marginTop="8.0dp" android:layout_marginRight="8.0dp" android:elevation="0.0dp" app:cardElevation="0.0dp" app:cardMaxElevation="0.0dp">
+                <LinearLayout android:orientation="vertical" android:padding="16.0dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+                    <TextView android:textAppearance="?textAppearanceSubtitle2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/app_name_long" />
+                    <TextView android:textAppearance="?textAppearanceBody2" android:textColor="?android:textColorSecondary" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dp" android:text="@string/app_desc" />
+                </LinearLayout>
+            </io.nekohasekai.sagernet.ui.toolkit.LiquidGlassCardView>
+            <androidx.coordinatorlayout.widget.CoordinatorLayout android:id="@id/about_fragment_holder" android:layout_width="match_parent" android:layout_height="match_parent" />
+            <io.nekohasekai.sagernet.ui.toolkit.LiquidGlassCardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="8.0dp" android:layout_marginRight="8.0dp" android:layout_marginBottom="8.0dp" android:elevation="0.0dp" app:cardElevation="0.0dp" app:cardMaxElevation="0.0dp">
+                <LinearLayout android:orientation="vertical" android:padding="16.0dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+                    <TextView android:textAppearance="?textAppearanceSubtitle2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/license" />
+                    <TextView android:textAppearance="?textAppearanceBody2" android:textSize="12.0sp" android:textColor="?android:textColorSecondary" android:id="@id/license" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dp" android:textIsSelectable="true" />
+                </LinearLayout>
+            </io.nekohasekai.sagernet.ui.toolkit.LiquidGlassCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

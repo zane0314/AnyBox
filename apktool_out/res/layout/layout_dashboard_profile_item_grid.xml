@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:background="@drawable/bg_dashboard_group_row" android:focusable="true" android:clickable="true" android:layout_width="match_parent" android:layout_height="76.0dp"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <View android:layout_gravity="start|center" android:id="@id/dashboard_profile_selected" android:background="?colorPrimary" android:visibility="gone" android:layout_width="3.0dp" android:layout_height="46.0dp" />
+    <LinearLayout android:orientation="vertical" android:paddingTop="6.0dp" android:paddingBottom="2.0dp" android:layout_width="match_parent" android:layout_height="match_parent" android:paddingStart="9.0dp" android:paddingEnd="3.0dp">
+        <TextView android:textSize="12.0sp" android:textColor="?colorOnSurface" android:ellipsize="end" android:id="@id/dashboard_profile_name" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" android:fontFamily="sans-serif" android:layout_marginEnd="6.0dp" android:textFontWeight="500" />
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="1.0dp" android:baselineAligned="false" android:layout_marginEnd="6.0dp">
+            <TextView android:textSize="10.0sp" android:textColor="?skinSecondaryTextColor" android:ellipsize="end" android:id="@id/dashboard_profile_region" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxWidth="72.0dp" android:maxLines="1" />
+            <TextView android:textSize="9.0sp" android:textColor="?skinSecondaryTextColor" android:ellipsize="end" android:id="@id/dashboard_profile_traffic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:layout_marginStart="5.0dp" />
+        </LinearLayout>
+        <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="1.0dp">
+            <TextView android:textSize="11.0sp" android:textColor="?skinSecondaryTextColor" android:layout_gravity="start|center" android:id="@id/dashboard_profile_latency" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/dashboard_no_latency" android:maxLines="1" android:fontFamily="sans-serif" android:textFontWeight="600" />
+            <LinearLayout android:gravity="center_vertical" android:layout_gravity="end|center" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <com.google.android.material.progressindicator.CircularProgressIndicator android:id="@id/dashboard_profile_progress" android:visibility="gone" android:layout_width="16.0dp" android:layout_height="16.0dp" android:indeterminate="true" android:layout_marginEnd="2.0dp" app:indicatorColor="?colorPrimary" app:indicatorSize="14.0dp" app:trackColor="@color/liquid_progress_track" app:trackThickness="2.0dp" />
+                <androidx.appcompat.widget.AppCompatImageButton android:id="@id/dashboard_profile_region_action" android:padding="6.0dp" android:layout_width="30.0dp" android:layout_height="30.0dp" android:contentDescription="@string/dashboard_profile_test" app:srcCompat="@drawable/ic_baseline_speed_24" app:tint="@color/liquid_glass_secondary" style="@style/Widget.SagerNet.IconControl.ListAction" />
+                <androidx.appcompat.widget.AppCompatImageButton android:id="@id/dashboard_profile_more" android:padding="6.0dp" android:layout_width="30.0dp" android:layout_height="30.0dp" android:contentDescription="@string/more_actions" app:srcCompat="@drawable/ic_baseline_more_vert_24" app:tint="@color/liquid_glass_secondary" style="@style/Widget.SagerNet.IconControl.ListAction" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</FrameLayout>

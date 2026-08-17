@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <EditTextPreference android:singleLine="true" android:title="@string/webdav_server" android:key="webdavServer" android:summary="%s" app:icon="@drawable/ic_file_cloud_queue" />
+    <EditTextPreference android:singleLine="true" android:title="@string/webdav_username" android:key="webdavUsername" android:summary="%s" app:icon="@drawable/ic_baseline_person_24" />
+    <EditTextPreference android:singleLine="true" android:title="@string/webdav_password" android:key="webdavPassword" app:dialogLayout="@layout/layout_password_dialog" app:icon="@drawable/ic_settings_password" />
+    <EditTextPreference android:singleLine="true" android:title="@string/webdav_path" android:key="webdavPath" android:summary="%s" android:defaultValue="NekoBox" app:icon="@drawable/ic_baseline_folder_open_24" />
+    <Preference android:title="@string/webdav_test" android:key="webdavTest" app:icon="@drawable/ic_baseline_cast_connected_24" />
+</PreferenceScreen>

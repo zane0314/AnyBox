@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="8.0dp" android:paddingEnd="8.0dp" android:paddingBottom="8.0dp"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" style="@style/Widget.SagerNet.TextInputLayout.Liquid">
+        <com.google.android.material.textfield.TextInputEditText android:id="@id/smart_rule_input" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textUri" android:maxLines="3" android:fontFamily="monospace" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <TextView android:id="@id/smart_rule_status" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="?skinSecondaryTextColor" android:textSize="12.0sp" android:layout_marginTop="6.0dp" />
+    <com.google.android.material.button.MaterialButton android:id="@id/smart_rule_search_button" android:layout_width="match_parent" android:layout_height="44.0dp" android:layout_marginTop="8.0dp" style="@style/Widget.SagerNet.Button.Liquid.Secondary" />
+</LinearLayout>

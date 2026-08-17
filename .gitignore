@@ -1,0 +1,30 @@
+# apktool generated output
+/apktool_out/build/
+
+# Rebuilt packages and signing artifacts
+*.apk
+*.apks
+*.aab
+*.idsig
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+
+# Runtime/user data
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+.env
+.env.*
+
+# Local project state and backups
+/.ai/
+*.bak
+*~
+.DS_Store
+
+# Original APK signature metadata is not needed for rebuilding
+/apktool_out/original/META-INF/

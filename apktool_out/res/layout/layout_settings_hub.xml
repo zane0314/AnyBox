@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:background="@android:color/transparent" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="0.0dp" android:layout_height="0.0dp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintWidth_max="@dimen/main_content_max_width">
+        <include android:layout_width="match_parent" android:layout_height="wrap_content" layout="@layout/layout_appbar" />
+        <androidx.core.widget.NestedScrollView android:paddingBottom="@dimen/main_list_padding_bottom" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="1.0">
+            <LinearLayout android:orientation="vertical" android:paddingBottom="12.0dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="34.0dp" android:paddingStart="18.0dp" android:paddingEnd="18.0dp">
+                    <TextView android:textSize="12.0sp" android:textColor="?colorOnSurface" android:layout_width="0.0dp" android:layout_height="wrap_content" android:text="@string/settings_hub_section" android:layout_weight="1.0" android:fontFamily="sans-serif" android:textFontWeight="600" />
+                    <TextView android:textSize="11.0sp" android:textColor="?skinSecondaryTextColor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settings_hub_synced" />
+                </LinearLayout>
+                <io.nekohasekai.sagernet.ui.toolkit.LiquidGlassCardView android:id="@id/hub_card" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="14.0dp" android:layout_marginEnd="14.0dp" android:translationZ="?skinCardLift" android:elevation="0.0dp" app:cardBackgroundColor="?colorSurface" app:cardCornerRadius="?skinCardCornerRadius" app:cardElevation="0.0dp" app:cardMaxElevation="0.0dp" app:strokeColor="?skinCardStrokeColor" app:strokeWidth="?skinCardStrokeWidth">
+                    <LinearLayout android:orientation="vertical" android:id="@id/hub_items" android:background="?skinCardSheenBackground" android:layout_width="match_parent" android:layout_height="wrap_content" />
+                </io.nekohasekai.sagernet.ui.toolkit.LiquidGlassCardView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

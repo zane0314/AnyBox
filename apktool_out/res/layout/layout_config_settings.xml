@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_marginStart="@dimen/content_horizontal_margin" android:layout_marginEnd="@dimen/content_horizontal_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:layout_width="match_parent" android:layout_height="wrap_content" layout="@layout/layout_appbar" />
+    <androidx.fragment.app.FragmentContainerView android:id="@id/settings" android:layout_width="match_parent" android:layout_height="wrap_content" />
+</LinearLayout>

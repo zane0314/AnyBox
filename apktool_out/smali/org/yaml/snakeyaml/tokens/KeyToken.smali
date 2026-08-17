@@ -1,0 +1,30 @@
+.class public final Lorg/yaml/snakeyaml/tokens/KeyToken;
+.super Lorg/yaml/snakeyaml/tokens/Token;
+.source "SourceFile"
+
+
+# direct methods
+.method public constructor <init>(Lorg/yaml/snakeyaml/error/Mark;Lorg/yaml/snakeyaml/error/Mark;)V
+    .locals 0
+
+    .line 1
+    invoke-direct {p0, p1, p2}, Lorg/yaml/snakeyaml/tokens/Token;-><init>(Lorg/yaml/snakeyaml/error/Mark;Lorg/yaml/snakeyaml/error/Mark;)V
+
+    .line 2
+    .line 3
+    .line 4
+    return-void
+.end method
+
+
+# virtual methods
+.method public getTokenId()Lorg/yaml/snakeyaml/tokens/Token$ID;
+    .locals 1
+
+    .line 1
+    sget-object v0, Lorg/yaml/snakeyaml/tokens/Token$ID;->Key:Lorg/yaml/snakeyaml/tokens/Token$ID;
+
+    .line 2
+    .line 3
+    return-object v0
+.end method
