@@ -821,6 +821,11 @@
     .line 8
     move-result-object p1
 
+    # AnyBox: patch final config JSON (DNS split for CN geo rules)
+    invoke-static {p1}, Lio/nekohasekai/sagernet/fmt/AnyBoxConfigPatcher;->apply(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object p1
+
     .line 9
     sget-object v0, Lmoe/matsuri/nb4a/net/LocalResolverImpl;->INSTANCE:Lmoe/matsuri/nb4a/net/LocalResolverImpl;
 
