@@ -202,6 +202,8 @@
     const/4 v1, 0x0
 
     .line 5
+    iput-boolean v1, p0, Lio/nekohasekai/sagernet/bg/SagerConnection;->connectionActive:Z
+
     iput-boolean v1, p0, Lio/nekohasekai/sagernet/bg/SagerConnection;->callbackRegistered:Z
 
     .line 6
@@ -237,6 +239,8 @@
     .line 22
     .line 23
     :cond_0
+    iput-object v0, p0, Lio/nekohasekai/sagernet/bg/SagerConnection;->callback:Lio/nekohasekai/sagernet/bg/SagerConnection$Callback;
+
     return-void
 .end method
 
@@ -546,7 +550,7 @@
 .end method
 
 .method public onServiceDisconnected(Landroid/content/ComponentName;)V
-    .locals 0
+    .locals 1
 
     .line 1
     invoke-direct {p0}, Lio/nekohasekai/sagernet/bg/SagerConnection;->unregisterCallback()V
@@ -576,6 +580,10 @@
     .line 13
     .line 14
     iput-object p1, p0, Lio/nekohasekai/sagernet/bg/SagerConnection;->binder:Landroid/os/IBinder;
+
+    iput-boolean p1, p0, Lio/nekohasekai/sagernet/bg/SagerConnection;->connectionActive:Z
+
+    iput-object p1, p0, Lio/nekohasekai/sagernet/bg/SagerConnection;->callback:Lio/nekohasekai/sagernet/bg/SagerConnection$Callback;
 
     .line 15
     .line 16

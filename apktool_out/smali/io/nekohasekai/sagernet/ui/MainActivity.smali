@@ -9674,43 +9674,6 @@
     .line 541
     .line 542
     :cond_e
-    sget-object v1, Lio/nekohasekai/sagernet/bg/BaseService$State;->Idle:Lio/nekohasekai/sagernet/bg/BaseService$State;
-
-    .line 543
-    .line 544
-    const/4 v3, 0x0
-
-    .line 545
-    const/4 v5, 0x0
-
-    .line 546
-    const/4 v2, 0x0
-
-    .line 547
-    const/16 v7, 0x12
-
-    .line 548
-    .line 549
-    const/4 v10, 0x0
-
-    .line 550
-    move-object v0, p0
-
-    .line 551
-    move v4, v6
-
-    .line 552
-    move v6, v7
-
-    .line 553
-    move-object v7, v10
-
-    .line 554
-    invoke-static/range {v0 .. v7}, Lio/nekohasekai/sagernet/ui/MainActivity;->changeState$default(Lio/nekohasekai/sagernet/ui/MainActivity;Lio/nekohasekai/sagernet/bg/BaseService$State;Ljava/lang/String;ZZLjava/lang/String;ILjava/lang/Object;)V
-
-    .line 555
-    .line 556
-    .line 557
     iget-object v0, p0, Lio/nekohasekai/sagernet/ui/MainActivity;->connection:Lio/nekohasekai/sagernet/bg/SagerConnection;
 
     .line 558
@@ -11041,6 +11004,16 @@
 
     .line 7
     invoke-virtual {v0, v1}, Lio/nekohasekai/sagernet/bg/SagerConnection;->updateConnectionId(I)V
+
+    invoke-virtual {v0}, Lio/nekohasekai/sagernet/bg/SagerConnection;->getService()Lio/nekohasekai/sagernet/aidl/ISagerNetService;
+
+    move-result-object v1
+
+    if-nez v1, :cond_service_reconnect_done
+
+    invoke-virtual {v0, p0, p0}, Lio/nekohasekai/sagernet/bg/SagerConnection;->connect(Landroid/content/Context;Lio/nekohasekai/sagernet/bg/SagerConnection$Callback;)V
+
+    :cond_service_reconnect_done
 
     .line 8
     .line 9
