@@ -11976,6 +11976,52 @@
     invoke-static/range {v0 .. v7}, Lio/nekohasekai/sagernet/ui/MainActivity;->changeState$default(Lio/nekohasekai/sagernet/ui/MainActivity;Lio/nekohasekai/sagernet/bg/BaseService$State;Ljava/lang/String;ZZLjava/lang/String;ILjava/lang/Object;)V
 
     .line 11
+    # AnyBox: surface service start failure (msg is only set on failure stops)
+    if-eqz p3, :cond_anybox_no_err
+
+    invoke-static {p3}, Lkotlin/text/StringsKt;->isBlank(Ljava/lang/CharSequence;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_anybox_no_err
+
+    sget-object v0, Lio/nekohasekai/sagernet/bg/BaseService$State;->Stopped:Lio/nekohasekai/sagernet/bg/BaseService$State;
+
+    if-ne p1, v0, :cond_anybox_no_err
+
+    invoke-virtual {p0}, Lio/nekohasekai/sagernet/ui/MainActivity;->isFinishing()Z
+
+    move-result v0
+
+    if-nez v0, :cond_anybox_no_err
+
+    invoke-virtual {p0}, Lio/nekohasekai/sagernet/ui/MainActivity;->isDestroyed()Z
+
+    move-result v0
+
+    if-nez v0, :cond_anybox_no_err
+
+    new-instance v0, Lcom/google/android/material/dialog/MaterialAlertDialogBuilder;
+
+    invoke-direct {v0, p0}, Lcom/google/android/material/dialog/MaterialAlertDialogBuilder;-><init>(Landroid/content/Context;)V
+
+    const v1, 0x7f1302eb
+
+    invoke-virtual {v0, v1}, Lcom/google/android/material/dialog/MaterialAlertDialogBuilder;->setTitle$1(I)V
+
+    iget-object v1, v0, Landroidx/appcompat/app/AlertDialog$Builder;->P:Landroidx/appcompat/app/AlertController$AlertParams;
+
+    iput-object p3, v1, Landroidx/appcompat/app/AlertController$AlertParams;->mMessage:Ljava/lang/CharSequence;
+
+    const v1, 0x7f13020f
+
+    const/4 v2, 0x0
+
+    invoke-virtual {v0, v1, v2}, Lcom/google/android/material/dialog/MaterialAlertDialogBuilder;->setPositiveButton$1(ILandroid/content/DialogInterface$OnClickListener;)V
+
+    invoke-virtual {v0}, Landroidx/appcompat/app/AlertDialog$Builder;->show()Landroidx/appcompat/app/AlertDialog;
+
+    :cond_anybox_no_err
     .line 12
     .line 13
     return-void
