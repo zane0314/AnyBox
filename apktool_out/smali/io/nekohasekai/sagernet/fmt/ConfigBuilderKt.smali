@@ -2177,7 +2177,7 @@
 
     iput-object v3, v12, Lmoe/matsuri/nb4a/SingBoxOptions$Outbound_URLTestOptions;->url:Ljava/lang/String;
 
-    const/16 v3, 0x32
+    const/16 v3, 0x5
 
     .line 190
     invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -2191,7 +2191,7 @@
 
     const-string v6, "interval"
 
-    const-string v15, "5m"
+    const-string v15, "10m"
 
     invoke-interface {v3, v6, v15}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
