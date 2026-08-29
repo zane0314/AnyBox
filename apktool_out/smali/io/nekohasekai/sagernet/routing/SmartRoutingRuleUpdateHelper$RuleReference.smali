@@ -36,27 +36,27 @@
 
 # direct methods
 .method constructor <init>(Ljava/lang/String;Ljava/lang/String;Z)V
-    .registers 5
+    .locals 1
 
-    .line 553
+    .line 608
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 551
+    .line 606
     new-instance v0, Ljava/util/LinkedHashMap;
 
     invoke-direct {v0}, Ljava/util/LinkedHashMap;-><init>()V
 
     iput-object v0, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$RuleReference;->groupUrls:Ljava/util/LinkedHashMap;
 
-    .line 554
+    .line 609
     iput-object p1, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$RuleReference;->normalized:Ljava/lang/String;
 
-    .line 555
+    .line 610
     iput-object p2, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$RuleReference;->downloadUrl:Ljava/lang/String;
 
-    .line 556
+    .line 611
     iput-boolean p3, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$RuleReference;->srs:Z
 
-    .line 557
+    .line 612
     return-void
 .end method

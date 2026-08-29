@@ -1308,6 +1308,46 @@
 
     .line 40
     :cond_2
+    const-string v1, "http://"
+    invoke-virtual {v0, v1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    move-result v1
+    if-eqz v1, :cond_check_https
+    new-instance v1, Ljava/lang/IllegalArgumentException;
+    const-string v2, "Rule field error: URL cannot be used as ip_cidr"
+    invoke-direct {v1, v2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    throw v1
+
+    :cond_check_https
+    const-string v1, "https://"
+    invoke-virtual {v0, v1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    move-result v1
+    if-eqz v1, :cond_check_ipasn
+    new-instance v1, Ljava/lang/IllegalArgumentException;
+    const-string v2, "Rule field error: URL cannot be used as ip_cidr"
+    invoke-direct {v1, v2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    throw v1
+
+    :cond_check_ipasn
+    const-string v1, "IP-ASN,"
+    invoke-virtual {v0, v1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    move-result v1
+    if-eqz v1, :cond_check_asn
+    new-instance v1, Ljava/lang/IllegalArgumentException;
+    const-string v2, "ASN_UNSUPPORTED: sing-box core has no ip_asn matcher"
+    invoke-direct {v1, v2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    throw v1
+
+    :cond_check_asn
+    const-string v1, "ASN,"
+    invoke-virtual {v0, v1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    move-result v1
+    if-eqz v1, :cond_add_ip
+    new-instance v1, Ljava/lang/IllegalArgumentException;
+    const-string v2, "ASN_UNSUPPORTED: sing-box core has no ip_asn matcher"
+    invoke-direct {v1, v2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    throw v1
+
+    :cond_add_ip
     iget-object v1, p0, Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;->ip_cidr:Ljava/util/List;
 
     invoke-interface {v1, v0}, Ljava/util/Collection;->add(Ljava/lang/Object;)Z

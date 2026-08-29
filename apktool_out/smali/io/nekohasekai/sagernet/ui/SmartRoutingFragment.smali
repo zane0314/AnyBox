@@ -2377,6 +2377,20 @@
     .line 26
     .line 27
     move-result-object p1
+    invoke-interface {p1}, Ljava/util/Set;->isEmpty()Z
+    move-result v2
+    if-eqz v2, :cond_custom_packages_ready
+    sget-object v2, Lio/nekohasekai/sagernet/database/DataStore;->INSTANCE:Lio/nekohasekai/sagernet/database/DataStore;
+    invoke-virtual {v2}, Lio/nekohasekai/sagernet/database/DataStore;->getRoutePackages()Ljava/lang/String;
+    move-result-object v2
+    invoke-static {v2}, Lmoe/matsuri/nb4a/utils/KotlinUtilKt;->listByLineOrComma(Ljava/lang/String;)Ljava/util/List;
+    move-result-object v2
+    check-cast v2, Ljava/lang/Iterable;
+    new-instance v4, Ljava/util/LinkedHashSet;
+    invoke-direct {v4}, Ljava/util/LinkedHashSet;-><init>()V
+    invoke-interface {v4, v2}, Ljava/util/Collection;->addAll(Ljava/util/Collection;)Z
+    move-object p1, v4
+    :cond_custom_packages_ready
 
     .line 28
     move-object v2, p1
@@ -6237,6 +6251,8 @@
     invoke-direct {p0}, Lio/nekohasekai/sagernet/ui/SmartRoutingFragment;->refreshSourceGroup()V
 
     invoke-static {p0, v7}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->bind(Ljava/lang/Object;Landroid/view/View;)V
+
+    invoke-static {p0, v7}, Lio/nekohasekai/sagernet/routing/AnyBoxRoutingProbeHelper;->bind(Ljava/lang/Object;Landroid/view/View;)V
 
     .line 257
     .line 258

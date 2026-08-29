@@ -26,18 +26,18 @@
 
 # direct methods
 .method private constructor <init>()V
-    .registers 1
+    .locals 0
 
-    .line 560
+    .line 615
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
 .end method
 
 .method synthetic constructor <init>(Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$1;)V
-    .registers 2
+    .locals 0
 
-    .line 560
+    .line 615
     invoke-direct {p0}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$UpdateResult;-><init>()V
 
     return-void
@@ -46,9 +46,9 @@
 
 # virtual methods
 .method message(Landroid/content/Context;)Ljava/lang/String;
-    .registers 8
+    .locals 6
 
-    .line 567
+    .line 622
     iget v0, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$UpdateResult;->updated:I
 
     iget v1, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$UpdateResult;->failed:I
@@ -63,32 +63,30 @@
 
     add-int/2addr v0, v1
 
-    if-nez v0, :cond_16
+    if-nez v0, :cond_0
 
-    .line 568
+    .line 623
     const-string v0, "smart_rules_update_empty"
 
     const-string v1, "No referenced rules to update"
 
-    # invokes: Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->string(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
     invoke-static {p1, v0, v1}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->access$400(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p1
 
     return-object p1
 
-    .line 570
-    :cond_16
+    .line 625
+    :cond_0
     const-string v0, "smart_rules_update_result"
 
     const-string v1, "Updated %1$d, failed %2$d; %3$d .srs rule(s) wait for the core schedule"
 
-    # invokes: Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->string(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
     invoke-static {p1, v0, v1}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->access$400(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p1
 
-    .line 572
+    .line 627
     invoke-static {}, Ljava/util/Locale;->getDefault()Ljava/util/Locale;
 
     move-result-object v0

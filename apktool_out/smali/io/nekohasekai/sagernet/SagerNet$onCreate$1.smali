@@ -246,6 +246,12 @@
 
     invoke-static {p1}, Lio/nekohasekai/sagernet/SagerNet$onCreate$1;->migrateRoutePositions(Landroid/content/Context;)V
 
+    invoke-static {}, Lio/nekohasekai/sagernet/routing/AnyBoxRuleSeedHelper;->seed()V
+
+    iget-object p1, p0, Lio/nekohasekai/sagernet/SagerNet$onCreate$1;->this$0:Lio/nekohasekai/sagernet/SagerNet;
+
+    invoke-static {p1}, Lio/nekohasekai/sagernet/PackageReplaceHelper;->cleanupIfVersionChanged(Landroid/content/Context;)V
+
     .line 11
     .line 12
     .line 13

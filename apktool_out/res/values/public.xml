@@ -5066,6 +5066,8 @@
     <public type="string" name="smart_domain_title" id="0x7f1303fd" />
     <public type="string" name="smart_domain_hint" id="0x7f1303fe" />
     <public type="string" name="smart_domain_invalid" id="0x7f1303ff" />
+    <public type="string" name="url_test_interval" id="0x7f130400" />
+    <public type="string" name="url_test_tolerance" id="0x7f130401" />
     <public type="style" name="AlertDialog.AppCompat" id="0x7f140000" />
     <public type="style" name="AlertDialog.AppCompat.Light" id="0x7f140001" />
     <public type="style" name="Animation.AppCompat.Dialog" id="0x7f140002" />

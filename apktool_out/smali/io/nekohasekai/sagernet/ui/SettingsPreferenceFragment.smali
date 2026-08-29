@@ -1604,6 +1604,14 @@
 .method private static final onCreatePreferences$lambda$22(Lio/nekohasekai/sagernet/ui/SettingsPreferenceFragment;Landroidx/preference/Preference;Ljava/lang/Object;)Z
     .locals 2
 
+    check-cast p2, Ljava/lang/Boolean;
+    invoke-virtual {p2}, Ljava/lang/Boolean;->booleanValue()Z
+    move-result v0
+    if-nez v0, :cond_open_picker
+    const/4 v0, 0x1
+    return v0
+
+    :cond_open_picker
     .line 1
     new-instance p1, Landroid/content/Intent;
 
@@ -1631,8 +1639,6 @@
     .line 13
     .line 14
     .line 15
-    check-cast p2, Ljava/lang/Boolean;
-
     .line 16
     .line 17
     invoke-virtual {p2}, Ljava/lang/Boolean;->booleanValue()Z
@@ -5819,6 +5825,22 @@
     .line 1160
     .line 1161
     .line 1162
+    const-string v0, "anyboxFactoryReset"
+
+    invoke-virtual {v6, v0}, Landroidx/preference/PreferenceFragmentCompat;->findPreference(Ljava/lang/CharSequence;)Landroidx/preference/Preference;
+
+    move-result-object v0
+
+    new-instance v1, Lio/nekohasekai/sagernet/routing/AnyBoxResetHelper$ResetClick;
+
+    invoke-virtual {v6}, Landroidx/fragment/app/Fragment;->requireContext()Landroid/content/Context;
+
+    move-result-object v2
+
+    invoke-direct {v1, v2}, Lio/nekohasekai/sagernet/routing/AnyBoxResetHelper$ResetClick;-><init>(Landroid/content/Context;)V
+
+    invoke-virtual {v0, v1}, Landroidx/preference/Preference;->setOnPreferenceClickListener(Landroidx/preference/Preference$OnPreferenceClickListener;)V
+
     return-void
 .end method
 

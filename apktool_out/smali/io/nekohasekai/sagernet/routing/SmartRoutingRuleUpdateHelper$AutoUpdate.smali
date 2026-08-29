@@ -23,9 +23,9 @@
 
 # direct methods
 .method constructor <init>(I)V
-    .registers 2
+    .locals 0
 
-    .line 579
+    .line 634
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     iput p1, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$AutoUpdate;->generation:I
@@ -34,57 +34,54 @@
 .end method
 
 .method private current()Z
-    .registers 4
+    .locals 3
 
-    .line 600
-    # getter for: Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->WORKER_LOCK:Ljava/lang/Object;
+    .line 655
     invoke-static {}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->access$800()Ljava/lang/Object;
 
     move-result-object v0
 
     monitor-enter v0
 
-    .line 601
-    :try_start_5
+    .line 656
+    :try_start_0
     iget v1, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$AutoUpdate;->generation:I
 
-    # getter for: Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->workerGeneration:I
     invoke-static {}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->access$900()I
 
     move-result v2
 
-    if-ne v1, v2, :cond_19
+    if-ne v1, v2, :cond_0
 
     invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
 
     move-result-object v1
 
-    # getter for: Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->worker:Ljava/lang/Thread;
     invoke-static {}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->access$1000()Ljava/lang/Thread;
 
     move-result-object v2
 
-    if-ne v1, v2, :cond_19
+    if-ne v1, v2, :cond_0
 
     const/4 v1, 0x1
 
-    goto :goto_1a
+    goto :goto_0
 
-    :cond_19
+    :cond_0
     const/4 v1, 0x0
 
-    :goto_1a
+    :goto_0
     monitor-exit v0
 
     return v1
 
-    .line 602
-    :catchall_1c
+    .line 657
+    :catchall_0
     move-exception v1
 
     monitor-exit v0
-    :try_end_1e
-    .catchall {:try_start_5 .. :try_end_1e} :catchall_1c
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     throw v1
 .end method
@@ -92,11 +89,10 @@
 
 # virtual methods
 .method public run()V
-    .registers 6
+    .locals 5
 
-    .line 583
+    .line 638
     :try_start_0
-    # invokes: Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->delaySeconds()J
     invoke-static {}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->access$500()J
 
     move-result-wide v0
@@ -107,95 +103,92 @@
 
     invoke-static {v0, v1}, Ljava/lang/Thread;->sleep(J)V
 
-    .line 584
-    :goto_b
+    .line 639
+    :goto_0
     invoke-direct {p0}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$AutoUpdate;->current()Z
 
     move-result v0
 
-    if-eqz v0, :cond_44
+    if-eqz v0, :cond_3
 
-    .line 585
-    # invokes: Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->intervalMillis()J
+    .line 640
     invoke-static {}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->access$600()J
 
     move-result-wide v0
 
-    .line 586
+    .line 641
     const-wide/16 v2, 0x0
 
     cmp-long v4, v0, v2
 
-    if-gtz v4, :cond_1c
+    if-gtz v4, :cond_0
 
     return-void
 
-    .line 587
-    :cond_1c
+    .line 642
+    :cond_0
     const/4 v2, 0x0
 
-    # invokes: Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->update(Z)Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$UpdateResult;
     invoke-static {v2}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->access$000(Z)Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$UpdateResult;
 
     move-result-object v2
 
-    .line 588
+    .line 643
     invoke-direct {p0}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$AutoUpdate;->current()Z
 
     move-result v3
 
-    if-nez v3, :cond_28
+    if-nez v3, :cond_1
 
     return-void
 
-    .line 589
-    :cond_28
+    .line 644
+    :cond_1
     iget v2, v2, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$UpdateResult;->updated:I
 
-    if-lez v2, :cond_2f
+    if-lez v2, :cond_2
 
-    # invokes: Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->reloadService()V
     invoke-static {}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->access$700()V
 
-    .line 590
-    :cond_2f
+    .line 645
+    :cond_2
     invoke-static {v0, v1}, Ljava/lang/Thread;->sleep(J)V
-    :try_end_32
-    .catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_32} :catch_3c
-    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_32} :catch_33
+    :try_end_0
+    .catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_0} :catch_1
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 591
-    goto :goto_b
+    .line 646
+    goto :goto_0
 
-    .line 594
-    :catch_33
+    .line 649
+    :catch_0
     move-exception v0
 
-    .line 595
+    .line 650
     const-string v1, "AnyBoxRuleUpdate"
 
     const-string v2, "Automatic rule update stopped"
 
     invoke-static {v1, v2, v0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
-    goto :goto_45
+    goto :goto_1
 
-    .line 592
-    :catch_3c
+    .line 647
+    :catch_1
     move-exception v0
 
-    .line 593
+    .line 648
     invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
 
     move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/Thread;->interrupt()V
 
-    .line 596
-    :cond_44
+    .line 651
+    :cond_3
     nop
 
-    .line 597
-    :goto_45
+    .line 652
+    :goto_1
     return-void
 .end method

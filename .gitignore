@@ -28,3 +28,6 @@
 
 # Original APK signature metadata is not needed for rebuilding
 /apktool_out/original/META-INF/
+
+# probe/temp analysis artifacts
+.tmp-*

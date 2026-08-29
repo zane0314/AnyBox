@@ -2177,9 +2177,11 @@
 
     iput-object v3, v12, Lmoe/matsuri/nb4a/SingBoxOptions$Outbound_URLTestOptions;->url:Ljava/lang/String;
 
-    const/16 v3, 0x5
-
-    .line 190
+    sget-object v3, Lio/nekohasekai/sagernet/database/DataStore;->INSTANCE:Lio/nekohasekai/sagernet/database/DataStore;
+    invoke-virtual {v3}, Lio/nekohasekai/sagernet/database/DataStore;->getUrlTestTolerance()Ljava/lang/String;
+    move-result-object v3
+    invoke-static {v3}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+    move-result v3
     invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
     move-result-object v3
@@ -2191,7 +2193,9 @@
 
     const-string v6, "interval"
 
-    const-string v15, "10m"
+    sget-object v15, Lio/nekohasekai/sagernet/database/DataStore;->INSTANCE:Lio/nekohasekai/sagernet/database/DataStore;
+    invoke-virtual {v15}, Lio/nekohasekai/sagernet/database/DataStore;->getUrlTestInterval()Ljava/lang/String;
+    move-result-object v15
 
     invoke-interface {v3, v6, v15}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
@@ -4504,9 +4508,54 @@
     invoke-interface {v13}, Ljava/util/Iterator;->next()Ljava/lang/Object;
 
     move-result-object v14
-
     check-cast v14, Ljava/lang/String;
+    invoke-static {v14}, Lio/nekohasekai/sagernet/fmt/ConfigBuilderKt;->normalizeRuleSource(Ljava/lang/String;)Ljava/lang/String;
+    move-result-object v14
 
+    const-string v15, "list:"
+    invoke-virtual {v14, v15}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    move-result v15
+    if-eqz v15, :cond_ruleset_srs
+    const/4 v15, 0x5
+    invoke-virtual {v14, v15}, Ljava/lang/String;->substring(I)Ljava/lang/String;
+    move-result-object v14
+    invoke-static {v9, v5, v14}, Lio/nekohasekai/sagernet/fmt/ConfigBuilderKt;->appendListRuleSource(Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;Lio/nekohasekai/sagernet/database/RuleEntity;Ljava/lang/String;)V
+    goto :goto_4
+
+    :cond_ruleset_srs
+    const-string v15, "srs:"
+    invoke-virtual {v14, v15}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    move-result v15
+    if-eqz v15, :cond_ruleset_kind
+    const/4 v15, 0x4
+    invoke-virtual {v14, v15}, Ljava/lang/String;->substring(I)Ljava/lang/String;
+    move-result-object v14
+    const-string v15, "rssite:"
+    invoke-virtual {v15, v14}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+    move-result-object v14
+    goto :cond_ruleset_supported
+
+    :cond_ruleset_kind
+    const-string v15, "rsip:"
+    invoke-virtual {v14, v15}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    move-result v15
+    if-nez v15, :cond_ruleset_supported
+    const-string v15, "rssite:"
+    invoke-virtual {v14, v15}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    move-result v15
+    if-eqz v15, :cond_ruleset_error
+
+    goto :cond_ruleset_supported
+
+    :cond_ruleset_error
+    new-instance v15, Ljava/lang/IllegalArgumentException;
+    const-string v0, "Unsupported rule source: "
+    invoke-virtual {v0, v14}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+    move-result-object v0
+    invoke-direct {v15, v0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    throw v15
+
+    :cond_ruleset_supported
     .line 34
     invoke-static {v14}, Lmoe/matsuri/nb4a/SingBoxOptionsUtilKt;->processRulesetUrl(Ljava/lang/String;)Lkotlin/Pair;
 
@@ -5690,9 +5739,24 @@
     goto :goto_1b
 
     :cond_group_outbound
-    # Resolve group outbound to "proxy" tag (uses current active group's selector)
-    # ponytail: simplified - group routing uses current group selector
-    # Full per-group urltest outbound would require creating new outbounds in buildConfig
+    invoke-static {v2, v3}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;
+    move-result-object v6
+    move-object/from16 v7, p6
+    invoke-virtual {v7, v6}, Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+    move-result-object v6
+    check-cast v6, Ljava/lang/String;
+    if-eqz v6, :cond_group_build
+    move-object/from16 v2, v6
+    goto :goto_1b
+
+    :cond_group_build
+    invoke-static {v0, v7, v2, v3}, Lio/nekohasekai/sagernet/fmt/ConfigBuilderKt;->buildConfig$lambda$123$makeGroupOutbound(Lmoe/matsuri/nb4a/SingBoxOptions$MyOptions;Ljava/util/HashMap;J)Ljava/lang/String;
+    move-result-object v6
+    if-eqz v6, :cond_group_fallback
+    move-object/from16 v2, v6
+    goto :goto_1b
+
+    :cond_group_fallback
     move-object/from16 v2, p4
 
     goto :goto_1b
@@ -5838,8 +5902,167 @@
 
     goto :goto_20
 
-    :cond_3b
+:cond_3b
     return-void
+.end method
+
+.method private static final normalizeRuleSource(Ljava/lang/String;)Ljava/lang/String;
+    .locals 3
+
+    const-string v0, "list:"
+    invoke-virtual {p0, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    move-result v1
+    if-nez v1, :cond_ok
+    const-string v0, "srs:"
+    invoke-virtual {p0, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    move-result v1
+    if-nez v1, :cond_ok
+    const-string v0, "rsip:"
+    invoke-virtual {p0, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    move-result v1
+    if-nez v1, :cond_ok
+    const-string v0, "rssite:"
+    invoke-virtual {p0, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    move-result v1
+    if-nez v1, :cond_ok
+
+    const-string v0, "http://"
+    invoke-virtual {p0, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    move-result v1
+    if-eqz v1, :cond_https
+    goto :cond_url
+
+    :cond_https
+    const-string v0, "https://"
+    invoke-virtual {p0, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+    move-result v1
+    if-eqz v1, :cond_error
+
+    :cond_url
+    const-string v0, ".srs"
+    invoke-virtual {p0, v0}, Ljava/lang/String;->endsWith(Ljava/lang/String;)Z
+    move-result v1
+    if-eqz v1, :cond_list_url
+    const-string v0, "srs:"
+    invoke-virtual {v0, p0}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+    move-result-object p0
+    return-object p0
+
+    :cond_list_url
+    const-string v0, ".list"
+    invoke-virtual {p0, v0}, Ljava/lang/String;->endsWith(Ljava/lang/String;)Z
+    move-result v1
+    if-eqz v1, :cond_error
+    const-string v0, "list:"
+    invoke-virtual {v0, p0}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+    move-result-object p0
+    return-object p0
+
+    :cond_error
+    new-instance v0, Ljava/lang/IllegalArgumentException;
+    const-string v1, "Unsupported rule source: "
+    invoke-virtual {v1, p0}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+    move-result-object v1
+    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+    throw v0
+
+    :cond_ok
+    return-object p0
+.end method
+
+.method private static final appendListRuleSource(Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;Lio/nekohasekai/sagernet/database/RuleEntity;Ljava/lang/String;)V
+    .locals 4
+
+    invoke-virtual {p1}, Lio/nekohasekai/sagernet/database/RuleEntity;->getId()J
+    move-result-wide v0
+    invoke-static {v0, v1}, Ljava/lang/Long;->toString(J)Ljava/lang/String;
+    move-result-object v0
+    const-string v1, "route:"
+    invoke-virtual {v1, v0}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+    move-result-object v1
+    invoke-static {v1, p2}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper;->loadRules(Ljava/lang/String;Ljava/lang/String;)Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper$ParsedRules;
+    move-result-object v2
+    invoke-static {p0, v2}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper;->appendParsed(Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper$ParsedRules;)V
+    return-void
+.end method
+
+.method private static final buildConfig$lambda$123$makeGroupOutbound(Lmoe/matsuri/nb4a/SingBoxOptions$MyOptions;Ljava/util/HashMap;J)Ljava/lang/String;
+    .locals 12
+    const-wide/16 v0, 0x64
+    add-long v2, p2, v0
+    neg-long v2, v2
+    const-string v0, "group:"
+    invoke-static {v2, v3}, Ljava/lang/Long;->toString(J)Ljava/lang/String;
+    move-result-object v1
+    invoke-virtual {v0, v1}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+    move-result-object v0
+    const/4 v1, 0x0
+    invoke-static {v0, v1}, Lio/nekohasekai/sagernet/routing/SmartRoutingTargetHelper;->candidates(Ljava/lang/String;Ljava/util/List;)Ljava/util/List;
+    move-result-object v0
+    new-instance v1, Ljava/util/ArrayList;
+    invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
+    invoke-interface {v0}, Ljava/lang/Iterable;->iterator()Ljava/util/Iterator;
+    move-result-object v4
+    :cond_group_loop
+    invoke-interface {v4}, Ljava/util/Iterator;->hasNext()Z
+    move-result v0
+    if-eqz v0, :cond_group_done
+    invoke-interface {v4}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+    move-result-object v0
+    invoke-static {v0}, Lio/nekohasekai/sagernet/routing/SmartRoutingTargetHelper;->entityId(Ljava/lang/Object;)J
+    move-result-wide v5
+    invoke-static {v5, v6}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;
+    move-result-object v7
+    invoke-virtual {p1, v7}, Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+    move-result-object v0
+    check-cast v0, Ljava/lang/String;
+    if-eqz v0, :cond_group_loop
+    invoke-virtual {v1, v0}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+    goto :cond_group_loop
+    :cond_group_done
+    invoke-interface {v1}, Ljava/util/Collection;->isEmpty()Z
+    move-result v0
+    if-eqz v0, :cond_group_create
+    const/4 v0, 0x0
+    return-object v0
+    :cond_group_create
+    new-instance v0, Ljava/lang/StringBuilder;
+    const-string v4, "route-group-"
+    invoke-direct {v0, v4}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+    invoke-virtual {v0, v2, v3}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+    move-result-object v0
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v0
+    new-instance v4, Lmoe/matsuri/nb4a/SingBoxOptions$Outbound_URLTestOptions;
+    invoke-direct {v4}, Lmoe/matsuri/nb4a/SingBoxOptions$Outbound_URLTestOptions;-><init>()V
+    const-string v5, "urltest"
+    iput-object v5, v4, Lmoe/matsuri/nb4a/SingBoxOptions$Outbound;->type:Ljava/lang/String;
+    iput-object v0, v4, Lmoe/matsuri/nb4a/SingBoxOptions$Outbound;->tag:Ljava/lang/String;
+    iput-object v1, v4, Lmoe/matsuri/nb4a/SingBoxOptions$Outbound_URLTestOptions;->outbounds:Ljava/util/List;
+    sget-object v5, Lio/nekohasekai/sagernet/database/DataStore;->INSTANCE:Lio/nekohasekai/sagernet/database/DataStore;
+    invoke-virtual {v5}, Lio/nekohasekai/sagernet/database/DataStore;->getConnectionTestURL()Ljava/lang/String;
+    move-result-object v5
+    iput-object v5, v4, Lmoe/matsuri/nb4a/SingBoxOptions$Outbound_URLTestOptions;->url:Ljava/lang/String;
+    sget-object v5, Lio/nekohasekai/sagernet/database/DataStore;->INSTANCE:Lio/nekohasekai/sagernet/database/DataStore;
+    invoke-virtual {v5}, Lio/nekohasekai/sagernet/database/DataStore;->getUrlTestTolerance()Ljava/lang/String;
+    move-result-object v5
+    invoke-static {v5}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+    move-result v5
+    invoke-static {v5}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+    move-result-object v5
+    iput-object v5, v4, Lmoe/matsuri/nb4a/SingBoxOptions$Outbound_URLTestOptions;->tolerance:Ljava/lang/Integer;
+    iget-object v5, v4, Lmoe/matsuri/nb4a/SingBoxOptions$SingBoxOption;->_hack_config_map:Ljava/util/Map;
+    sget-object v6, Lio/nekohasekai/sagernet/database/DataStore;->INSTANCE:Lio/nekohasekai/sagernet/database/DataStore;
+    invoke-virtual {v6}, Lio/nekohasekai/sagernet/database/DataStore;->getUrlTestInterval()Ljava/lang/String;
+    move-result-object v6
+    const-string v7, "interval"
+    invoke-interface {v5, v7, v6}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    iget-object v5, p0, Lmoe/matsuri/nb4a/SingBoxOptions$MyOptions;->outbounds:Ljava/util/List;
+    invoke-interface {v5, v4}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+    invoke-static {p2, p3}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;
+    move-result-object v5
+    invoke-virtual {p1, v5, v0}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    return-object v0
 .end method
 
 .method private static final buildConfig$lambda$123$appendUserRules$lambda$84$makeDnsRuleObj(Ljava/util/List;Lkotlin/jvm/internal/Ref$ObjectRef;)Lmoe/matsuri/nb4a/SingBoxOptions$DNSRule_DefaultOptions;

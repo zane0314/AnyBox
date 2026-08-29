@@ -25,7 +25,7 @@
 
 # direct methods
 .method constructor <init>(Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$1;Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$UpdateResult;)V
-    .registers 3
+    .locals 0
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "()V"
@@ -45,7 +45,7 @@
 
 # virtual methods
 .method public run()V
-    .registers 5
+    .locals 4
 
     .line 75
     iget-object v0, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$1$1;->this$0:Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$1;
@@ -54,7 +54,7 @@
 
     const/4 v1, 0x1
 
-    if-eqz v0, :cond_e
+    if-eqz v0, :cond_0
 
     iget-object v0, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$1$1;->this$0:Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$1;
 
@@ -63,12 +63,11 @@
     invoke-virtual {v0, v1}, Landroid/view/View;->setEnabled(Z)V
 
     .line 76
-    :cond_e
+    :cond_0
     iget-object v0, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$1$1;->this$0:Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$1;
 
     iget-object v0, v0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$1;->val$root:Landroid/view/View;
 
-    # invokes: Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->refreshSummary(Landroid/view/View;)V
     invoke-static {v0}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->access$100(Landroid/view/View;)V
 
     .line 77
@@ -97,16 +96,15 @@
 
     iget v0, v0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$UpdateResult;->updated:I
 
-    if-lez v0, :cond_37
+    if-lez v0, :cond_1
 
     iget-object v0, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$1$1;->this$0:Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$1;
 
     iget-object v0, v0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$1;->val$fragment:Ljava/lang/Object;
 
-    # invokes: Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->reloadFromFragment(Ljava/lang/Object;)V
     invoke-static {v0}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->access$200(Ljava/lang/Object;)V
 
     .line 79
-    :cond_37
+    :cond_1
     return-void
 .end method

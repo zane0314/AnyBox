@@ -419,16 +419,28 @@
     .line 11
     .line 12
     .line 13
-    sget-object v3, Lio/nekohasekai/sagernet/SagerNet;->Companion:Lio/nekohasekai/sagernet/SagerNet$Companion;
+    invoke-virtual {p0}, Landroidx/fragment/app/Fragment;->requireContext()Landroid/content/Context;
 
     .line 14
     .line 15
-    invoke-virtual {v3}, Lio/nekohasekai/sagernet/SagerNet$Companion;->getAppVersionNameForDisplay()Ljava/lang/String;
+    move-result-object v3
 
     .line 16
     .line 17
     .line 18
+    invoke-virtual {v3}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;
+
+    move-result-object v4
+
+    invoke-virtual {v3}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
+
     move-result-object v3
+
+    invoke-virtual {v4, v3, p1}, Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;
+
+    move-result-object v4
+
+    iget-object v3, v4, Landroid/content/pm/PackageInfo;->versionName:Ljava/lang/String;
 
     .line 19
     new-instance v4, Lcom/danielstone/materialaboutlibrary/items/MaterialAboutActionItem;

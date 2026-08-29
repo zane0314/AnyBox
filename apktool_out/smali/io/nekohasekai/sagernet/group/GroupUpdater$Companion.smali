@@ -100,7 +100,7 @@
 .end method
 
 .method public final finishUpdate(Lio/nekohasekai/sagernet/database/ProxyGroup;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-    .locals 4
+    .locals 6
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -172,6 +172,7 @@
     .line 31
     .line 32
     .line 33
+    move-object v3, p1
     sget-object v0, Lio/nekohasekai/sagernet/database/GroupManager;->INSTANCE:Lio/nekohasekai/sagernet/database/GroupManager;
 
     .line 34
@@ -196,6 +197,15 @@
 
     .line 44
     :cond_0
+    sget-object v0, Lkotlinx/coroutines/GlobalScope;->INSTANCE:Lkotlinx/coroutines/GlobalScope;
+    sget-object v1, Lkotlinx/coroutines/scheduling/DefaultScheduler;->INSTANCE:Lkotlinx/coroutines/scheduling/DefaultScheduler;
+    new-instance v2, Lio/nekohasekai/sagernet/group/SubscriptionGroupAutoTest$1;
+    invoke-virtual {v3}, Lio/nekohasekai/sagernet/database/ProxyGroup;->getId()J
+    move-result-wide v4
+    const/4 p1, 0x0
+    invoke-direct {v2, v4, v5, p1}, Lio/nekohasekai/sagernet/group/SubscriptionGroupAutoTest$1;-><init>(JLkotlin/coroutines/Continuation;)V
+    const/4 p1, 0x2
+    invoke-static {v0, v1, v2, p1}, Lkotlinx/coroutines/JobKt;->launch$default(Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext$Element;Lkotlin/jvm/functions/Function2;I)Lkotlinx/coroutines/StandaloneCoroutine;
     sget-object p1, Lkotlin/Unit;->INSTANCE:Lkotlin/Unit;
 
     .line 45

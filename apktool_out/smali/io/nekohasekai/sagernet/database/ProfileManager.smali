@@ -3353,6 +3353,8 @@
     .end annotation
 
     .line 1
+    invoke-static {}, Lio/nekohasekai/sagernet/routing/AnyBoxRuleSeedHelper;->seed()V
+
     move-object/from16 v6, p0
 
     .line 2
@@ -3449,6 +3451,8 @@
     .line 42
     const/4 v9, 0x2
 
+    const/4 v10, 0x6
+
     .line 43
     if-eqz v1, :cond_6
 
@@ -3470,6 +3474,14 @@
 
     .line 52
     .line 53
+    if-eq v1, v10, :cond_route_global_resume
+
+    const/4 v13, 0x7
+
+    if-eq v1, v13, :cond_route_catch_resume
+
+    const/4 v13, 0x5
+
     if-ne v1, v13, :cond_1
 
     .line 54
@@ -3519,6 +3531,20 @@
     .line 74
     .line 75
     goto/16 :goto_4
+
+    :cond_route_global_resume
+    iget-object v1, v15, Lio/nekohasekai/sagernet/database/ProfileManager$getRules$1;->L$0:Ljava/lang/Object;
+
+    invoke-static {v0}, Lkotlin/ResultKt;->throwOnFailure(Ljava/lang/Object;)V
+
+    goto :route_global_done
+
+    :cond_route_catch_resume
+    iget-object v1, v15, Lio/nekohasekai/sagernet/database/ProfileManager$getRules$1;->L$0:Ljava/lang/Object;
+
+    invoke-static {v0}, Lkotlin/ResultKt;->throwOnFailure(Ljava/lang/Object;)V
+
+    goto :route_defaults_done
 
     .line 76
     .line 77
@@ -4751,6 +4777,60 @@
     .line 665
     .line 666
     :cond_e
+    invoke-static {}, Lio/nekohasekai/sagernet/routing/AnyBoxRuleSeedHelper;->needsRouteDefaults()Z
+
+    move-result v0
+
+    if-eqz v0, :route_defaults_done
+
+    const-string v0, "\u56fd\u5916\u7f51\u5740"
+
+    invoke-static {v0}, Lio/nekohasekai/sagernet/routing/AnyBoxRuleSeedHelper;->hasRouteRule(Ljava/lang/String;)Z
+
+    move-result v0
+
+    if-nez v0, :route_global_done
+
+    iput-object v1, v15, Lio/nekohasekai/sagernet/database/ProfileManager$getRules$1;->L$0:Ljava/lang/Object;
+
+    const/4 v0, 0x6
+
+    iput v0, v15, Lio/nekohasekai/sagernet/database/ProfileManager$getRules$1;->label:I
+
+    invoke-static {v1, v15}, Lio/nekohasekai/sagernet/routing/AnyBoxRuleSeedHelper;->createGlobalRule(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    if-ne v0, v14, :route_global_done
+
+    return-object v14
+
+    :route_global_done
+    const-string v0, "\u6f0f\u7f51\u4e4b\u9c7c"
+
+    invoke-static {v0}, Lio/nekohasekai/sagernet/routing/AnyBoxRuleSeedHelper;->hasRouteRule(Ljava/lang/String;)Z
+
+    move-result v0
+
+    if-nez v0, :route_defaults_done
+
+    iput-object v1, v15, Lio/nekohasekai/sagernet/database/ProfileManager$getRules$1;->L$0:Ljava/lang/Object;
+
+    const/4 v0, 0x7
+
+    iput v0, v15, Lio/nekohasekai/sagernet/database/ProfileManager$getRules$1;->label:I
+
+    invoke-static {v1, v15}, Lio/nekohasekai/sagernet/routing/AnyBoxRuleSeedHelper;->createCatchAllRule(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    if-ne v0, v14, :route_defaults_done
+
+    return-object v14
+
+    :route_defaults_done
+    invoke-static {}, Lio/nekohasekai/sagernet/routing/AnyBoxRuleSeedHelper;->seed()V
+
     sget-object v0, Lio/nekohasekai/sagernet/database/SagerDatabase;->Companion:Lio/nekohasekai/sagernet/database/SagerDatabase$Companion;
 
     .line 667

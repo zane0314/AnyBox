@@ -202,6 +202,56 @@ public final class SmartRoutingRuleUpdateHelper {
         } catch (Exception e) {
             Log.w(TAG, "Unable to enumerate rule URLs", e);
         }
+        try {
+            Object dbCompanion = Class.forName("io.nekohasekai.sagernet.database.SagerDatabase")
+                    .getField("Companion").get(null);
+            Object dao = call(dbCompanion, "getRulesDao");
+            List<?> rules = (List<?>) call(dao, "allRules");
+            if (rules != null) {
+                for (Object rule : rules) {
+                    if (!Boolean.TRUE.equals(call(rule, "getEnabled"))) continue;
+                    long id = ((Number) call(rule, "getId")).longValue();
+                    String scope = "route:" + id;
+                    for (String getter : new String[]{"getDomains", "getIp"}) {
+                        for (String url : remoteSources((String) call(rule, getter))) {
+                            String normalized = normalizeUrl(url);
+                            RuleReference reference = result.get(normalized);
+                            if (reference == null) {
+                                reference = new RuleReference(normalized, url, isSrs(normalized));
+                                result.put(normalized, reference);
+                            }
+                            Set<String> originals = reference.groupUrls.get(scope);
+                            if (originals == null) {
+                                originals = new LinkedHashSet<>();
+                                reference.groupUrls.put(scope, originals);
+                            }
+                            originals.add(url);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "Unable to enumerate route rule URLs", e);
+        }
+        return result;
+    }
+
+    /** Extracts downloadable rule sources from a route rule field. */
+    static List<String> remoteSources(String value) {
+        List<String> result = new java.util.ArrayList<>();
+        if (value == null) return result;
+        for (String token : value.split("[\\s,]+")) {
+            String url = null;
+            if (token.startsWith("list:")) url = token.substring(5);
+            else if (token.startsWith("srs:")) url = token.substring(4);
+            else if (token.startsWith("http://") || token.startsWith("https://")) {
+                String lower = token.toLowerCase(Locale.ROOT);
+                if (lower.endsWith(".list") || lower.endsWith(".srs")) url = token;
+            }
+            if (url == null || url.isEmpty()) continue;
+            if (!url.startsWith("http://") && !url.startsWith("https://")) continue;
+            result.add(url);
+        }
         return result;
     }
 
@@ -275,7 +325,12 @@ public final class SmartRoutingRuleUpdateHelper {
             if (parseDurationMillis("bad") != 0L) return false;
             if (!expired(0L, 1000L, 100L)) return false;
             if (expired(950L, 1000L, 100L)) return false;
-            return expired(900L, 1000L, 100L);
+            if (!expired(900L, 1000L, 100L)) return false;
+            if (remoteSources("geoip:cn\nrsip:cn\nrssite:geolocation-!cn").size() != 0) return false;
+            if (!"https://a.com/x.list".equals(
+                    remoteSources("list:https://a.com/x.list").get(0))) return false;
+            return "https://a.com/y.srs".equals(
+                    remoteSources("https://a.com/y.srs,example.com").get(0));
         } catch (Exception e) {
             return false;
         }

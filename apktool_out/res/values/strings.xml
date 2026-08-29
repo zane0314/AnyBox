@@ -623,6 +623,8 @@ If you must use this, try N=2 first to see if it solves your issues. Strongly re
     <string name="ruleset_prefix_error">Ruleset format error: must start with rsip: or rssite:</string>
     <string name="ruleset_update_interval">RuleSet Update Interval</string>
     <string name="ruleset_update_interval_summary">Time between updates of remote RuleSets. Examples: 1h, 30m, 3600s. Set to 0 to disable automatic updates</string>
+    <string name="url_test_interval">URLTest Interval</string>
+    <string name="url_test_tolerance">URLTest Switch Tolerance</string>
     <string name="save">Save</string>
     <string name="scanning">Scanning…</string>
     <string name="search_apps">Search…</string>
@@ -925,4 +927,13 @@ Do you want to download it?"</string>
     <string name="xhttp_settings">XHTTP Settings</string>
     <string name="xtls_flow">Flow (VLESS Sub-protocol)</string>
     <string name="yes">Yes</string>
+    <string name="anybox_reset">Factory restore</string>
+    <string name="anybox_reset_summary">Delete selected data and restore factory state</string>
+    <string name="anybox_reset_nodes">Nodes (subscriptions, groups, servers)</string>
+    <string name="anybox_reset_split">Smart routing (exits, rule sources, app picks)</string>
+    <string name="anybox_reset_routes">Route rules (all custom and built-in rules)</string>
+    <string name="anybox_reset_confirm">Delete and restore</string>
+    <string name="anybox_reset_cancel">Cancel</string>
+    <string name="anybox_reset_none">Nothing selected</string>
+    <string name="anybox_reset_done">Restored. AnyBox will close, please reopen.</string>
 </resources>

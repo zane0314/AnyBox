@@ -29,7 +29,7 @@
 
 # direct methods
 .method constructor <init>(Landroid/view/View;Landroid/view/View;Landroid/content/Context;Ljava/lang/Object;)V
-    .registers 5
+    .locals 0
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "()V"
@@ -53,12 +53,11 @@
 
 # virtual methods
 .method public run()V
-    .registers 4
+    .locals 3
 
     .line 72
     const/4 v0, 0x1
 
-    # invokes: Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->update(Z)Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$UpdateResult;
     invoke-static {v0}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->access$000(Z)Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$UpdateResult;
 
     move-result-object v0

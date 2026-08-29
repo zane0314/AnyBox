@@ -47,6 +47,84 @@
     return-object p0
 .end method
 
+.method public static loadRules(Ljava/lang/String;Ljava/lang/String;)Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper$ParsedRules;
+    .registers 5
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/lang/Exception;
+        }
+    .end annotation
+
+    sget-object v0, Lio/nekohasekai/sagernet/routing/SmartRoutingStore;->INSTANCE:Lio/nekohasekai/sagernet/routing/SmartRoutingStore;
+    invoke-virtual {v0, p0, p1}, Lio/nekohasekai/sagernet/routing/SmartRoutingStore;->ruleCache(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    move-result-object v1
+    if-eqz v1, :cond_download
+    invoke-virtual {v1}, Ljava/lang/String;->isEmpty()Z
+    move-result v2
+    if-nez v2, :cond_download
+    invoke-static {v1}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper;->parseList(Ljava/lang/String;)Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper$ParsedRules;
+    move-result-object p0
+    return-object p0
+
+    :cond_download
+    invoke-static {p1}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper;->download(Ljava/lang/String;)Ljava/lang/String;
+    move-result-object v1
+    invoke-static {v1}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper;->parseList(Ljava/lang/String;)Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper$ParsedRules;
+    move-result-object v2
+    invoke-virtual {v0, p0, p1, v1}, Lio/nekohasekai/sagernet/routing/SmartRoutingStore;->setRuleCache(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+    return-object v2
+.end method
+
+.method public static appendParsed(Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper$ParsedRules;)V
+    .registers 4
+    if-eqz p1, :cond_done
+
+    iget-object v0, p0, Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;->domain:Ljava/util/List;
+    if-nez v0, :cond_domain
+    new-instance v0, Ljava/util/ArrayList;
+    invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
+    iput-object v0, p0, Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;->domain:Ljava/util/List;
+    :cond_domain
+    iget-object v0, p0, Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;->domain:Ljava/util/List;
+    iget-object v1, p1, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper$ParsedRules;->domain:Ljava/util/List;
+    invoke-interface {v0, v1}, Ljava/util/List;->addAll(Ljava/util/Collection;)Z
+
+    iget-object v0, p0, Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;->domain_suffix:Ljava/util/List;
+    if-nez v0, :cond_suffix
+    new-instance v0, Ljava/util/ArrayList;
+    invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
+    iput-object v0, p0, Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;->domain_suffix:Ljava/util/List;
+    :cond_suffix
+    iget-object v0, p0, Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;->domain_suffix:Ljava/util/List;
+    iget-object v1, p1, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper$ParsedRules;->domainSuffix:Ljava/util/List;
+    invoke-interface {v0, v1}, Ljava/util/List;->addAll(Ljava/util/Collection;)Z
+
+    iget-object v0, p0, Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;->domain_keyword:Ljava/util/List;
+    if-nez v0, :cond_keyword
+    new-instance v0, Ljava/util/ArrayList;
+    invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
+    iput-object v0, p0, Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;->domain_keyword:Ljava/util/List;
+    :cond_keyword
+    iget-object v0, p0, Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;->domain_keyword:Ljava/util/List;
+    iget-object v1, p1, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper$ParsedRules;->domainKeyword:Ljava/util/List;
+    invoke-interface {v0, v1}, Ljava/util/List;->addAll(Ljava/util/Collection;)Z
+
+    iget-object v0, p0, Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;->ip_cidr:Ljava/util/List;
+    if-nez v0, :cond_ip
+    new-instance v0, Ljava/util/ArrayList;
+    invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
+    iput-object v0, p0, Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;->ip_cidr:Ljava/util/List;
+    :cond_ip
+    iget-object v0, p0, Lmoe/matsuri/nb4a/SingBoxOptions$Rule_DefaultOptions;->ip_cidr:Ljava/util/List;
+    iget-object v1, p1, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper$ParsedRules;->ipCidr:Ljava/util/List;
+    invoke-interface {v0, v1}, Ljava/util/List;->addAll(Ljava/util/Collection;)Z
+    iget-object v1, p1, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleHelper$ParsedRules;->ipCidr6:Ljava/util/List;
+    invoke-interface {v0, v1}, Ljava/util/List;->addAll(Ljava/util/Collection;)Z
+
+    :cond_done
+    return-void
+.end method
+
 .method private static download(Ljava/lang/String;)Ljava/lang/String;
     .registers 6
     .annotation system Ldalvik/annotation/Throws;
@@ -882,9 +960,9 @@
 
     invoke-virtual {v10, v11}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v10
+    move-result v14
 
-    if-eqz v10, :cond_7e
+    if-eqz v14, :cond_7e
 
     move v11, v7
 
@@ -895,9 +973,9 @@
 
     invoke-virtual {v10, v11}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v10
+    move-result v14
 
-    if-eqz v10, :cond_7e
+    if-eqz v14, :cond_7e
 
     const/4 v11, 0x4
 
@@ -908,9 +986,9 @@
 
     invoke-virtual {v10, v11}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v10
+    move-result v14
 
-    if-eqz v10, :cond_7e
+    if-eqz v14, :cond_7e
 
     move v11, v13
 
@@ -921,9 +999,9 @@
 
     invoke-virtual {v10, v11}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v10
+    move-result v14
 
-    if-eqz v10, :cond_7e
+    if-eqz v14, :cond_7e
 
     move v11, v12
 
@@ -934,9 +1012,9 @@
 
     invoke-virtual {v10, v12}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v10
+    move-result v14
 
-    if-eqz v10, :cond_7e
+    if-eqz v14, :cond_7e
 
     goto :goto_b1
 
@@ -946,7 +1024,7 @@
     :goto_b1
     packed-switch v11, :pswitch_data_10c
 
-    goto :goto_d6
+    goto/16 :goto_d7
 
     .line 132
     :pswitch_b5
@@ -954,7 +1032,7 @@
 
     move-result v10
 
-    if-eqz v10, :cond_d6
+    if-eqz v10, :cond_invalid_cidr
 
     invoke-virtual {v5, v9}, Ljava/util/LinkedHashSet;->add(Ljava/lang/Object;)Z
 
@@ -966,7 +1044,7 @@
 
     move-result v10
 
-    if-eqz v10, :cond_d6
+    if-eqz v10, :cond_invalid_cidr
 
     invoke-virtual {v4, v9}, Ljava/util/LinkedHashSet;->add(Ljava/lang/Object;)Z
 
@@ -995,6 +1073,10 @@
     .line 136
     :catch_d5
     move-exception v9
+    throw v9
+
+    :cond_invalid_cidr
+    goto :goto_d6
 
     :cond_d6
     :goto_d6

@@ -851,4 +851,13 @@ www.example.com 1.1.1.1 1.1.1.2"</string>
     <string name="xhttp_settings">XHTTP 设置</string>
     <string name="xtls_flow">Flow（VLESS 子协议）</string>
     <string name="yes">是</string>
+    <string name="anybox_reset">一键还原</string>
+    <string name="anybox_reset_summary">删除所选数据并还原到初始状态</string>
+    <string name="anybox_reset_nodes">节点信息（订阅、分组、节点）</string>
+    <string name="anybox_reset_split">分流信息（策略出口、规则来源、应用选择）</string>
+    <string name="anybox_reset_routes">路由信息（全部路由规则）</string>
+    <string name="anybox_reset_confirm">删除并还原</string>
+    <string name="anybox_reset_cancel">取消</string>
+    <string name="anybox_reset_none">未选择任何数据</string>
+    <string name="anybox_reset_done">已还原，应用即将关闭，请重新打开</string>
 </resources>

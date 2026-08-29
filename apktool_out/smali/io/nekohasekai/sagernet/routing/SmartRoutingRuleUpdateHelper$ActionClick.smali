@@ -27,50 +27,48 @@
 
 # direct methods
 .method constructor <init>(Ljava/lang/Object;Landroid/view/View;I)V
-    .registers 4
+    .locals 0
 
-    .line 611
+    .line 666
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 612
+    .line 667
     iput-object p1, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$ActionClick;->fragment:Ljava/lang/Object;
 
-    .line 613
+    .line 668
     iput-object p2, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$ActionClick;->root:Landroid/view/View;
 
-    .line 614
+    .line 669
     iput p3, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$ActionClick;->action:I
 
-    .line 615
+    .line 670
     return-void
 .end method
 
 
 # virtual methods
 .method public onClick(Landroid/view/View;)V
-    .registers 3
+    .locals 1
 
-    .line 618
+    .line 673
     iget p1, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$ActionClick;->action:I
 
     iget-object v0, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$ActionClick;->fragment:Ljava/lang/Object;
 
-    if-nez p1, :cond_c
+    if-nez p1, :cond_0
 
     iget-object p1, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$ActionClick;->root:Landroid/view/View;
 
-    # invokes: Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->runManual(Ljava/lang/Object;Landroid/view/View;)V
     invoke-static {v0, p1}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->access$1100(Ljava/lang/Object;Landroid/view/View;)V
 
-    goto :goto_11
+    goto :goto_0
 
-    :cond_c
+    :cond_0
     iget-object p1, p0, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper$ActionClick;->root:Landroid/view/View;
 
-    # invokes: Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->showSettings(Ljava/lang/Object;Landroid/view/View;)V
     invoke-static {v0, p1}, Lio/nekohasekai/sagernet/routing/SmartRoutingRuleUpdateHelper;->access$1200(Ljava/lang/Object;Landroid/view/View;)V
 
-    .line 619
-    :goto_11
+    .line 674
+    :goto_0
     return-void
 .end method

@@ -15200,6 +15200,63 @@
     return-object v0
 .end method
 
+.method public final getUrlTestInterval()Ljava/lang/String;
+    .locals 2
+    sget-object v0, Lio/nekohasekai/sagernet/database/DataStore;->configurationStore:Lio/nekohasekai/sagernet/database/preference/RoomPreferenceDataStore;
+    const-string v1, "urlTestInterval"
+    invoke-virtual {v0, v1}, Lio/nekohasekai/sagernet/database/preference/RoomPreferenceDataStore;->getString(Ljava/lang/String;)Ljava/lang/String;
+    move-result-object v0
+    if-nez v0, :cond_0
+    const-string v0, "10m"
+    :cond_0
+    return-object v0
+.end method
+
+.method public final isAppInVpn(Ljava/lang/String;)Z
+    .locals 4
+    invoke-virtual {p0}, Lio/nekohasekai/sagernet/database/DataStore;->getProxyApps()Z
+    move-result v0
+    const/4 v1, 0x1
+    if-nez v0, :cond_0
+    return v1
+    :cond_0
+    invoke-virtual {p0}, Lio/nekohasekai/sagernet/database/DataStore;->getRoutePackages()Ljava/lang/String;
+    move-result-object v0
+    new-instance v2, Ljava/lang/StringBuilder;
+    const-string v3, "\n"
+    invoke-direct {v2, v3}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+    invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v0
+    new-instance v2, Ljava/lang/StringBuilder;
+    invoke-direct {v2, v3}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+    invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object p1
+    invoke-virtual {v0, p1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+    move-result p1
+    invoke-virtual {p0}, Lio/nekohasekai/sagernet/database/DataStore;->getBypass()Z
+    move-result v0
+    if-eqz v0, :cond_1
+    xor-int/lit8 p1, p1, 0x1
+    :cond_1
+    return p1
+.end method
+
+.method public final getUrlTestTolerance()Ljava/lang/String;
+    .locals 2
+    sget-object v0, Lio/nekohasekai/sagernet/database/DataStore;->configurationStore:Lio/nekohasekai/sagernet/database/preference/RoomPreferenceDataStore;
+    const-string v1, "urlTestTolerance"
+    invoke-virtual {v0, v1}, Lio/nekohasekai/sagernet/database/preference/RoomPreferenceDataStore;->getString(Ljava/lang/String;)Ljava/lang/String;
+    move-result-object v0
+    if-nez v0, :cond_0
+    const-string v0, "5"
+    :cond_0
+    return-object v0
+.end method
+
 .method public final getWebdavServer()Ljava/lang/String;
     .locals 2
 

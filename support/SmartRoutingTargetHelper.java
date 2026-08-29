@@ -147,11 +147,27 @@ public final class SmartRoutingTargetHelper {
                 call(dataStore, "setGlobalMode", new Class<?>[]{boolean.class}, false);
                 call(dataStore, "setServiceMode", new Class<?>[]{String.class}, "vpn");
             }
+            if (token.startsWith("group:")) autoTestGroup(Long.parseLong(token.substring(6)));
             refresh(fragment);
             invokeFragmentBridge(fragment, "access$reloadRunningService");
         } catch (Exception e) {
             throw new IllegalStateException("Unable to apply smart-routing target", e);
         }
+    }
+
+    private static void autoTestGroup(long groupId) throws Exception {
+        Class<?> continuation = Class.forName("kotlin.coroutines.Continuation");
+        Class<?> taskClass = Class.forName("io.nekohasekai.sagernet.group.SubscriptionGroupAutoTest$1");
+        java.lang.reflect.Constructor<?> constructor = taskClass.getDeclaredConstructor(long.class, continuation);
+        constructor.setAccessible(true);
+        Object task = constructor.newInstance(groupId, null);
+        Class<?> scope = Class.forName("kotlinx.coroutines.CoroutineScope");
+        Class<?> contextElement = Class.forName("kotlin.coroutines.CoroutineContext$Element");
+        Class<?> function2 = Class.forName("kotlin.jvm.functions.Function2");
+        Method launch = Class.forName("kotlinx.coroutines.JobKt").getMethod("launch$default",
+                scope, contextElement, function2, int.class);
+        launch.invoke(null, singleton("kotlinx.coroutines.GlobalScope"),
+                singleton("kotlinx.coroutines.scheduling.DefaultScheduler"), task, 2);
     }
 
     private static void refresh(Object fragment) {

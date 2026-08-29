@@ -675,6 +675,10 @@
         <item>3d</item>
         <item>7d</item>
     </string-array>
+    <string-array name="url_test_interval_entries"><item>1m</item><item>5m</item><item>10m</item><item>30m</item></string-array>
+    <string-array name="url_test_interval_values"><item>1m</item><item>5m</item><item>10m</item><item>30m</item></string-array>
+    <string-array name="url_test_tolerance_entries"><item>5 ms</item><item>10 ms</item><item>30 ms</item><item>50 ms</item></string-array>
+    <string-array name="url_test_tolerance_values"><item>5</item><item>10</item><item>30</item><item>50</item></string-array>
     <string-array name="smart_rule_update_delay_entries">
         <item>@string/smart_rules_update_immediately</item>
         <item>@string/smart_rules_update_15_seconds</item>

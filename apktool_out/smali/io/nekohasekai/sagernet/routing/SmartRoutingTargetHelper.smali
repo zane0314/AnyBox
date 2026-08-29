@@ -240,6 +240,8 @@
 
     invoke-static {v0, v1, v3, v2}, Lio/nekohasekai/sagernet/routing/SmartRoutingTargetHelper;->call(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
 
+    move-object v4, p2
+
     .line 145
     const-string p1, "off"
 
@@ -294,6 +296,27 @@
 
     .line 150
     :cond_0
+    const-string p1, "group:"
+
+    invoke-virtual {v4, p1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+
+    move-result p1
+
+    if-eqz p1, :cond_1
+
+    const/4 p1, 0x6
+
+    invoke-virtual {v4, p1}, Ljava/lang/String;->substring(I)Ljava/lang/String;
+
+    move-result-object p1
+
+    invoke-static {p1}, Ljava/lang/Long;->parseLong(Ljava/lang/String;)J
+
+    move-result-wide p1
+
+    invoke-static {p1, p2}, Lio/nekohasekai/sagernet/routing/SmartRoutingTargetHelper;->autoTestGroup(J)V
+
+    :cond_1
     invoke-static {p0}, Lio/nekohasekai/sagernet/routing/SmartRoutingTargetHelper;->refresh(Ljava/lang/Object;)V
 
     .line 151
@@ -316,6 +339,26 @@
     invoke-direct {p1, p2, p0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
 
     throw p1
+.end method
+
+.method private static autoTestGroup(J)V
+    .locals 4
+
+    sget-object v0, Lkotlinx/coroutines/GlobalScope;->INSTANCE:Lkotlinx/coroutines/GlobalScope;
+
+    sget-object v1, Lkotlinx/coroutines/scheduling/DefaultScheduler;->INSTANCE:Lkotlinx/coroutines/scheduling/DefaultScheduler;
+
+    new-instance v2, Lio/nekohasekai/sagernet/group/SubscriptionGroupAutoTest$1;
+
+    const/4 v3, 0x0
+
+    invoke-direct {v2, p0, p1, v3}, Lio/nekohasekai/sagernet/group/SubscriptionGroupAutoTest$1;-><init>(JLkotlin/coroutines/Continuation;)V
+
+    const/4 v3, 0x2
+
+    invoke-static {v0, v1, v2, v3}, Lkotlinx/coroutines/JobKt;->launch$default(Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext$Element;Lkotlin/jvm/functions/Function2;I)Lkotlinx/coroutines/StandaloneCoroutine;
+
+    return-void
 .end method
 
 .method private static call(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
