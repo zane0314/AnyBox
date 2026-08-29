@@ -18,17 +18,17 @@
 - Karing 第一版只索引 `ACL4SSR` 目录下的 `.srs`，不递归仓库，不下载 `.json`。
 - 新增 UI 必须复用当前皮肤 theme attr 和 `Widget.SagerNet.Button.Liquid.Secondary`。
 - 下载失败不得清空最近一次成功文本缓存；代理启动不得等待网络。
-- APK 目录 `/Users/zane/Downloads/Pskora_decompile/apktool_out` 不属于当前 Git 仓库，验证以汇编、安装和运行日志为准。
+- APK 目录 `<LOCAL_PATH>` 不属于当前 Git 仓库，验证以汇编、安装和运行日志为准。
 
 ---
 
 ### Task 1: 建立可回退的 APK 工作快照
 
 **Files:**
-- Read: `/Users/zane/Downloads/Pskora_decompile/.ai/HANDOFF.md`
-- Read: `/Users/zane/Downloads/Pskora_decompile/apktool_out/apktool.yml`
+- Read: `<LOCAL_PATH>`
+- Read: `<LOCAL_PATH>`
 - Create: `/tmp/anybox-rules-work-<timestamp>/`
-- Modify: `/Users/zane/Downloads/Pskora_decompile/.ai/HANDOFF.md`
+- Modify: `<LOCAL_PATH>`
 
 **Interfaces:**
 - Consumes: 当前 1.1.1 (238) `apktool_out`。
@@ -37,7 +37,7 @@
 - [ ] **Step 1: Verify identity and baseline files**
 
 ```bash
-cd /Users/zane/Downloads/Pskora_decompile
+cd <LOCAL_PATH>
 sha256sum apktool_out/smali/io/nekohasekai/sagernet/routing/SmartRoutingStore.smali \
   apktool_out/smali/io/nekohasekai/sagernet/fmt/ConfigBuilderKt.smali \
   apktool_out/smali/io/nekohasekai/sagernet/ui/SmartRoutingFragment.smali
@@ -66,7 +66,7 @@ Expected: 备份目录包含五个文件；不得删除或覆盖原 APK。
 - [ ] **Step 4: Commit the plan documents**
 
 ```bash
-cd '/Users/zane/Documents/ChatGPT/zane 代理软件'
+cd '<LOCAL_PATH> 代理软件'
 git add docs/superpowers/specs/2026-08-17-smart-routing-rule-url-design.md docs/superpowers/plans/2026-08-17-smart-routing-rules-plan.md
 git commit -m "docs: plan smart routing rule sources"
 ```
@@ -78,8 +78,8 @@ Expected: 提交只包含设计与实施计划。
 ### Task 2: 增加规则来源持久化
 
 **Files:**
-- Modify: `/Users/zane/Downloads/Pskora_decompile/apktool_out/smali/io/nekohasekai/sagernet/routing/SmartRoutingStore.smali`
-- Modify: `/Users/zane/Downloads/Pskora_decompile/.ai/HANDOFF.md`
+- Modify: `<LOCAL_PATH>`
+- Modify: `<LOCAL_PATH>`
 
 **Interfaces:**
 - Consumes: `DataStore.INSTANCE.getConfigurationStore()` 和稳定策略组 ID。
@@ -114,7 +114,7 @@ smartRouting.ruleStatus.<groupId>
 - [ ] **Step 4: Assemble and inspect**
 
 ```bash
-cd /Users/zane/Downloads/Pskora_decompile
+cd <LOCAL_PATH>
 apktool b -f apktool_out -o /tmp/anybox_rules_task2_unsigned.apk
 rg -n 'ruleUrls|setRuleUrls|ruleCache|setRuleCache|clearRuleCache|clearRuleData' apktool_out/smali/io/nekohasekai/sagernet/routing/SmartRoutingStore.smali
 ```
@@ -130,10 +130,10 @@ Expected: apktool exit code `0`，六个方法均存在。
 ### Task 3: 增加 Karing 索引和文本规则解析
 
 **Files:**
-- Create: `/Users/zane/Downloads/Pskora_decompile/apktool_out/smali/io/nekohasekai/sagernet/routing/SmartRoutingRuleHelper.smali`
-- Create: `/Users/zane/Downloads/Pskora_decompile/apktool_out/smali/io/nekohasekai/sagernet/routing/SmartRoutingRuleHelper$CatalogTask.smali`
-- Create: `/Users/zane/Downloads/Pskora_decompile/apktool_out/smali/io/nekohasekai/sagernet/routing/SmartRoutingRuleHelper$TextRuleTask.smali`
-- Modify: `/Users/zane/Downloads/Pskora_decompile/.ai/HANDOFF.md`
+- Create: `<LOCAL_PATH>`
+- Create: `<LOCAL_PATH>`
+- Create: `<LOCAL_PATH>`
+- Modify: `<LOCAL_PATH>`
 
 **Interfaces:**
 - Consumes: Task 2 persistence、Android `Context`。
@@ -179,7 +179,7 @@ IP-CIDR6,x           -> ip_cidr6
 - [ ] **Step 6: Assemble**
 
 ```bash
-cd /Users/zane/Downloads/Pskora_decompile
+cd <LOCAL_PATH>
 apktool b -f apktool_out -o /tmp/anybox_rules_task3_unsigned.apk
 ```
 
@@ -190,8 +190,8 @@ Expected: exit code `0`，helper 类进入重建 dex。
 ### Task 4: 将规则来源接入智能策略配置生成
 
 **Files:**
-- Modify: `/Users/zane/Downloads/Pskora_decompile/apktool_out/smali/io/nekohasekai/sagernet/fmt/ConfigBuilderKt.smali`
-- Modify: `/Users/zane/Downloads/Pskora_decompile/.ai/HANDOFF.md`
+- Modify: `<LOCAL_PATH>`
+- Modify: `<LOCAL_PATH>`
 
 **Interfaces:**
 - Consumes: 策略组的规则 URL、文本缓存、已解析的真实 outbound tag。
@@ -216,7 +216,7 @@ Expected: exit code `0`，helper 类进入重建 dex。
 - [ ] **Step 5: Assemble and inspect generated config**
 
 ```bash
-cd /Users/zane/Downloads/Pskora_decompile
+cd <LOCAL_PATH>
 apktool b -f apktool_out -o /tmp/anybox_rules_task4_unsigned.apk
 ```
 
@@ -227,11 +227,11 @@ apktool b -f apktool_out -o /tmp/anybox_rules_task4_unsigned.apk
 ### Task 5: 增加与当前皮肤一致的规则管理界面
 
 **Files:**
-- Modify: `/Users/zane/Downloads/Pskora_decompile/apktool_out/res/layout/layout_smart_routing_item.xml`
-- Modify: `/Users/zane/Downloads/Pskora_decompile/apktool_out/res/values/strings.xml`
-- Modify: `/Users/zane/Downloads/Pskora_decompile/apktool_out/smali/io/nekohasekai/sagernet/ui/SmartRoutingFragment.smali`
-- Create only if required by existing listener pattern: `/Users/zane/Downloads/Pskora_decompile/apktool_out/smali/io/nekohasekai/sagernet/ui/SmartRoutingFragment$Rule*.smali`
-- Modify: `/Users/zane/Downloads/Pskora_decompile/.ai/HANDOFF.md`
+- Modify: `<LOCAL_PATH>`
+- Modify: `<LOCAL_PATH>`
+- Modify: `<LOCAL_PATH>`
+- Create only if required by existing listener pattern: `<LOCAL_PATH>`
+- Modify: `<LOCAL_PATH>`
 
 **Interfaces:**
 - Consumes: 当前卡片 group ID、Task 2 持久化、Task 3 后台下载/搜索。
@@ -272,7 +272,7 @@ app:iconTint="?colorPrimary"
 - [ ] **Step 6: Assemble**
 
 ```bash
-cd /Users/zane/Downloads/Pskora_decompile
+cd <LOCAL_PATH>
 apktool b -f apktool_out -o /tmp/anybox_rules_task5_unsigned.apk
 ```
 
@@ -283,10 +283,10 @@ Expected: exit code `0`；打开智能分流页无 `VerifyError`、`IllegalAcces
 ### Task 6: 发布 AnyBox 1.1.1 并验证覆盖安装
 
 **Files:**
-- Verify: `/Users/zane/Downloads/Pskora_decompile/apktool_out/apktool.yml`
-- Create: `/Users/zane/Downloads/AnyBox_1.1.1.apk`
-- Modify: `/Users/zane/Downloads/Pskora_decompile/.ai/HANDOFF.md`
-- Modify: `/Users/zane/Documents/ChatGPT/zane 代理软件/.ai/HANDOFF.md`
+- Verify: `<LOCAL_PATH>`
+- Create: `<LOCAL_PATH>`
+- Modify: `<LOCAL_PATH>`
+- Modify: `<LOCAL_PATH> 代理软件/.ai/HANDOFF.md`
 
 - [ ] **Step 1: Capture upgrade baseline**
 
@@ -317,7 +317,7 @@ Expected: exit code `0`；打开智能分流页无 `VerifyError`、`IllegalAcces
 
 - [ ] **Step 6: Publish the local artifact only**
 
-将最终已验证 APK 写为 `/Users/zane/Downloads/AnyBox_1.1.1.apk`，记录大小和 SHA-256。当前不上传 GitHub；以后如上传，只能在用户再次授权后上传私人仓库。
+将最终已验证 APK 写为 `<LOCAL_PATH>`，记录大小和 SHA-256。当前不上传 GitHub；以后如上传，只能在用户再次授权后上传私人仓库。
 
 - [ ] **Step 7: Update handoffs with final evidence**
 
